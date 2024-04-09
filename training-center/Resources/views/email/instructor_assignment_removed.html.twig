@@ -1,0 +1,18 @@
+{% extends 'layout/email.html.twig' %}
+
+{% block title %}You&rsquo;re Removed from Instructing {{ Session.Course.name }}{% endblock %}
+
+{% block body %}
+  <h1 style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 200; margin: 40px 0 14px; padding: 0;">You&rsquo;re Removed from Instructing {{ Session.Course.name }}</h1>
+   	
+   	{% if Session.date2 is not null and Session.start_time2 is not null %}
+ 		<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 40px; padding: 0;">You&rsquo;re no longer assigned to instruct {{ Session.Course.name }} beginning on {{ Session.date1|date('F d, Y') }} at {{ Session.start_time1|date('g:i A') }}, and {{ Session.date2|date('F d, Y') }} at {{ Session.start_time2|date('g:i A') }}. Log in to your FHTC account view all upcoming courses.</p>
+ 	{% else %}
+ 		<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 40px; padding: 0;">You&rsquo;re no longer assigned to instruct {{ Session.Course.name }} beginning on {{ Session.date1|date('F d, Y') }} at {{ Session.start_time1|date('g:i A') }}. Log in to your FHTC account view all upcoming courses.</p>
+ 	{% endif %}
+        
+    {% include 'email/includes/button.html.twig' 
+      with {'text' : 'Get Started', 
+          'link' : absolute_url(path('login'))} %}
+        
+{% endblock %}

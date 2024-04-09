@@ -1,0 +1,19 @@
+.checkbutton-pair {
+    @extend .clearfix;
+
+    .checkbutton {
+        width : 46%;
+    }
+
+    label {
+        width : 100%;
+    }
+
+    .checkbutton:nth-child(1) {
+        float : left;
+    }
+
+    .checkbutton:nth-child(2) {
+        float : right;
+    }
+}

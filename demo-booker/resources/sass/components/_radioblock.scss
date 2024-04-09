@@ -1,0 +1,40 @@
+.checkblock {
+    display : inline-block;
+
+    input {
+        z-index  : -10;
+        position : absolute;
+    }
+
+    input:checked + .checkblock__label {
+        outline-color : #78CC0B;
+        color         : #78CC0B;
+
+        img {
+            display : inline-block;
+        }
+    }
+
+    img {
+        display : none;
+    }
+
+    .checkblock__label {
+        z-index          : 20;
+        background-color : #fff;
+        display          : inline-block;
+        font-family      : AcmeSans-Light;
+        user-select      : none;
+        margin-right     : 5px;
+        outline-width    : 1px;
+        outline-style    : solid;
+        outline-color    : #D2D2D2;
+        text-align       : center;
+        border-radius    : 3px;
+        font-size        : 12px;
+        color            : #777879;
+        line-height      : 60px;
+        width            : 88px;
+        cursor           : pointer;
+    }
+}

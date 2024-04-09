@@ -1,0 +1,64 @@
+{% set page_title = 'Assigned Classes' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <h1>Assigned Classes</h1>
+
+    {% for set in sets %}
+        {% if set.InstructorAssignments|length %}
+            <h2>{{ set.name }}</h2>
+
+            <ul class="card--list">
+                {% for InstructorAssignment in set.InstructorAssignments %}
+                    <li class="card--section">
+                        <div class="card--item" data-card-code="{{ InstructorAssignment.Session.Course.Program.slug }}">
+                            <div class="card--main">
+                                <div class="card--body">
+                                    <h3 class="card--title">{{ InstructorAssignment.Session.Course.name }} </h3>
+
+                                    <h4 class="card--sub-title">{{ InstructorAssignment.Session.date1|date('M d Y') }}, {{ InstructorAssignment.Session.start_time1|date('g:ia') }} &ndash; {{ InstructorAssignment.Session.end_time1|date('g:ia') }}</h4>
+
+                                    {% if InstructorAssignment.Session.start_time2 %}
+                                        <h4 class="card--sub-title">{{ InstructorAssignment.Session.date2|date('M d Y') }}, {{ InstructorAssignment.Session.start_time2|date('g:ia') }} &ndash; {{ InstructorAssignment.Session.end_time2|date('g:ia') }}</h4>
+                                    {% endif %}
+
+                                    {% if set.type == 'upcoming' %}
+                                        {% include 'classes/includes/location.html.twig' with {'Location': InstructorAssignment.Session.Location} %}
+                                    {% endif %}
+                                </div>
+
+                                <div class="card--links">
+                                    {% if set.type == 'upcoming' %}
+                                        <a href="{{ path('course_detail', {'course_slug': InstructorAssignment.Session.Course.slug, 'program_slug': InstructorAssignment.Session.Course.Program.slug}) }}" class="card--cta">View Course Details</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+
+                            {% if set.type == 'past' %}
+                                <div class="card--details card--details__padded" title="{{ InstructorAssignment.id }}">
+                                    <h4 class="card--sub-title">Attendance</h4>
+                                    {% if InstructorAssignment.attendance == 'show' %}
+                                        Show
+                                    {% elseif InstructorAssignment.attendance == 'noshow' %}
+                                        No-show
+                                    {% else %}
+                                        Not recorded
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {% if set.type == 'upcoming' %}
+                <div class="blank-state">
+                    <div class="blank-state__title">You don't have any upcoming assignments</div>
+
+                    <p>When you are assigned to instruct a course, you'll be able to review your assignments here</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

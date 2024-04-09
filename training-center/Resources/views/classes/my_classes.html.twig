@@ -1,0 +1,87 @@
+{% set page_title = 'My Classes' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <h1>My Classes</h1>
+
+    {% for set in sets %}
+        {% if set.Enrollments|length %}
+            <h2>{{ set.name }}</h2>
+
+            <ul class="card--list">
+                {% for Enrollment in set.Enrollments %}
+                    <li class="card--section">
+                        <div class="card--item" data-card-code="{{ Enrollment.Session.Course.Program.slug }}">
+                            <div class="card--main">
+                                <div class="card--body">
+                                    <h3 class="card--title">{{ Enrollment.Session.Course.name }} </h3>
+
+                                    <h4 class="card--sub-title">{{ Enrollment.Session.date1|date('M d Y') }}, {{ Enrollment.Session.start_time1|date('g:ia') }} &ndash; {{ Enrollment.Session.end_time1|date('g:ia') }}</h4>
+
+                                    {% if Enrollment.Session.start_time2 %}
+                                        <h4 class="card--sub-title">{{ Enrollment.Session.date2|date('M d Y') }}, {{ Enrollment.Session.start_time2|date('g:ia') }} &ndash; {{ Enrollment.Session.end_time2|date('g:ia') }}</h4>
+                                    {% endif %}
+
+                                    {% if set.type == 'upcoming' %}
+                                        {% include 'classes/includes/location.html.twig' with {'Location': Enrollment.Session.Location} %}
+                                    {% endif %}
+                                </div>
+
+                                <div class="card--links">
+                                    {% if set.type == 'upcoming' %}
+                                        <a href="{{ path('course_detail', {'course_slug': Enrollment.Session.Course.slug, 'program_slug': Enrollment.Session.Course.Program.slug}) }}" class="card--cta">View Course Details</a>
+                                    {% endif %}
+
+                                    {% if Enrollment.canBeCancelled() %}
+                                        <a href="{{ path('enrollment_cancellation', {'hash': Enrollment.hash}) }}" class="card--cta">Cancel</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            {% if set.type == 'upcoming' %}
+                                <div class="card--details card--details__padded">
+                                    {% if Enrollment.Session.Course.bring_to_class_array|length != 0 %}
+                                        <h4 class="card--sub-title">Bring to Class</h4>
+                                    {% endif %}
+
+                                    <ul>
+                                        {% for requirement in Enrollment.Session.Course.bring_to_class_array %}
+                                            <li>{{ requirement }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+
+                            {% if set.type == 'past' %}
+                                <div class="card--details card--details__padded" title="{{ Enrollment.id }}">
+                                    <h4 class="card--sub-title">Result</h4>
+                                    {% if Enrollment.attendance == 'show' %}
+                                        {% if Enrollment.grade == 'pass' %}
+                                            Grade: Passed
+                                        {% elseif Enrollment.grade == 'fail' %}
+                                            Grade: Failed
+                                        {% else %}
+                                            Grade: Pending
+                                        {% endif %}
+                                    {% elseif Enrollment.attendance == 'noshow' %}
+                                        You were marked as a no-show
+                                    {% else %}
+                                        Attendance was not recorded
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {% if set.type == 'upcoming' %}
+                <div class="blank-state">
+                    <div class="blank-state__title">You don't have upcoming classes</div>
+
+                    <p>Once you enroll in a course at the FH AHA Training Center, you'll be able to review your registration here.</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

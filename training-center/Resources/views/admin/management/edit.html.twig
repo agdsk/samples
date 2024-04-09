@@ -1,0 +1,12 @@
+{% extends 'layout/admin.html.twig' %}
+
+{% block body %}
+    <h1>Edit {{ name_singular }}</h1>
+
+    <section id="markdown-editor-container" class="boxy-form">
+        {{ form(form) }}
+    </section>
+    <div id="markdown-to-html-preview-container" class="html-preview html-preview__inactive course-detail">
+    	<div id="markdown-to-html-preview-text-container" class="html-preview-text-container"></div>
+    </div>
+{% endblock %}

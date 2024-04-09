@@ -1,0 +1,37 @@
+{% set page_title = 'Admin - Users' %}
+{% extends 'layout/admin.html.twig' %}
+
+{% set page_class = 'user-browser' %}
+
+{% block body %}
+    <h1 style="margin-bottom: 1rem;">User Search</h1>
+
+    <div class="form--container">
+       <p>Enter the name, OpID or email address of the user you're looking for</p>
+        {{ form(form) }}
+    </div>
+
+    {% if Users is not empty %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>OpID</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th>View</th>
+            </tr>
+
+            {% for User in Users %}
+                <tr>
+                    <td>{{ User.display_name }}</td>
+                    <td>{{ User.email }}</td>
+                    <td>{{ User.opid }}</td>
+                    <td>{{ User.title }}</td>
+                    <td>{{ User.department }}</td>
+                    <td><a href="{{ path('user-browser-show', {'id' : User.id}) }}">View</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

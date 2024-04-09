@@ -1,0 +1,34 @@
+.checkbutton {
+    display  : inline-block;
+    position : relative;
+
+    input {
+        z-index  : -10;
+        left     : 40px;
+        right    : auto;
+        position : absolute;
+    }
+
+    input:checked + .checkbutton__label {
+        border        : 2px solid #D2D2D2;
+        border-radius : 25px;
+        color         : transparent;
+        background    : #F0F0F0 url('/images/checkmark-grey.png') no-repeat center;
+    }
+
+    .checkbutton__label {
+        font-family     : AcmeSans-SemiBold;
+        user-select     : none;
+        background      : #FFFFFF;
+        border          : 2px solid #1C1E20;
+        border-radius   : 25px;
+        font-size       : 14px;
+        line-height     : 44px;
+        color           : #1C1E20;
+        padding         : 0 33px;
+        cursor          : pointer;
+        text-decoration : none;
+        text-align      : center;
+        display         : inline-block;
+    }
+}

@@ -1,0 +1,19 @@
+.page-control {
+    display     : flex;
+    align-items : center;
+
+    .page-control__left {
+        text-align : left;
+        flex       : 1;
+    }
+
+    .page-control__middle {
+        text-align : center;
+        flex       : 1;
+    }
+
+    .page-control__right {
+        text-align : right;
+        flex       : 1;
+    }
+}

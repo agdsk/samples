@@ -1,0 +1,18 @@
+.table-narrow {
+    width : 400px;
+
+    td {
+        height         : 40px;
+        vertical-align : top;
+        padding-left   : 5px;
+        padding-right  : 5px;
+    }
+
+    &__label-cell {
+        font-family : AcmeSans-Light;
+        font-size   : 14px;
+        color       : #1C1E20;
+        line-height : 40px;
+        width       : 120px;
+    }
+}

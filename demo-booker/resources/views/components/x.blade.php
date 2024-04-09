@@ -1,0 +1,1 @@
+<img src="{{ asset('images/x-grey.png') }}" class="row-delete-button">

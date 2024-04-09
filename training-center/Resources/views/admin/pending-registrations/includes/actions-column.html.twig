@@ -1,0 +1,17 @@
+<td data-table-header="Actions: ">
+    <a class="button" href="{{ path('app_management_enrollmentmanager_edit', { 'id' : Enrollment.id }) }}">Edit</a>
+
+    <form class="ajax-form" method="POST" 
+        action="{{ path('pending_registrations_approve', {enrollment_id: Enrollment.id}) }}"
+        data-inital-action="{{ path('pending_registrations_approve', {enrollment_id: Enrollment.id}) }}">
+
+        <button class="button" type="submit" data-state="active" data-copy="Approve" data-sentiment="positive">Approve</button>
+    </form>
+
+    <form class="ajax-form" method="POST"
+        action="{{ path('pending_registrations_cancel', {enrollment_id: Enrollment.id}) }}"
+        data-inital-action="{{ path('pending_registrations_cancel', {enrollment_id: Enrollment.id}) }}">
+
+        <button class="button" type="submit" data-state="active" data-copy="Deny" data-sentiment="negative">Deny</button>
+    </form>
+</td>

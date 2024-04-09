@@ -1,0 +1,46 @@
+.modal {
+    $width : 500px;
+    background    : #FFFFFF;
+    border        : 2px solid #F0F0F0;
+    box-shadow    : 0px 1px 2px 0px rgba(0, 0, 0, 0.50);
+    border-radius : 3px;
+    padding       : 32px;
+    width         : $width;
+    height        : $width;
+    overflow      : scroll;
+    display       : none;
+    top           : 80px;
+    position      : fixed;
+    left          : calc(50% - (#{$width} / 2));
+    right         : calc(50% - (#{$width} / 2));
+
+    &__title {
+        font-family : AcmeSans-SemiBold;
+        font-size   : 22px;
+        color       : #1C1E20;
+        line-height : 30px;
+    }
+
+    p {
+        font-family : AcmeSans-Light;
+        font-size   : 16px;
+        color       : #777879;
+        line-height : 22px;
+    }
+
+    &__button-set {
+        margin : 16px 0;
+
+        button {
+            margin : 4px 0;
+        }
+    }
+
+    &--wide {
+        width    : auto;
+        bottom   : 20px;
+        left     : 20px;
+        right    : 20px;
+        overflow : scroll;
+    }
+}

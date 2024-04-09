@@ -1,0 +1,17 @@
+select, .form-select {
+    background    : #FFFFFF;
+    border        : 1px solid #D2D2D2;
+    border-radius : 3px;
+    font-family   : AcmeSans-Light;
+    font-size     : 14px;
+    color         : #1C1E20;
+    line-height   : 16px;
+    padding       : 11px;
+    height        : 45px;
+    margin-bottom : 16px;
+
+    &:focus {
+        outline : none;
+        border  : 1px solid #000;
+    }
+}

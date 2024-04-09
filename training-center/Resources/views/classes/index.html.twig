@@ -1,0 +1,62 @@
+{% set page_title = Course.name ~ ' Classes' %}
+{% extends 'layout/standard.html.twig' %}
+{% set page_class = 'course-classes' %}
+
+{% block body %}
+
+
+    <div class="course-classes--header">
+        <div class="course-classes--header-part-one">
+            <h1>{{ Course.name }} Classes</h1>
+        </div>
+        <div class="course-classes--header-part-two">
+            {% include 'classes/includes/class_price.html.twig' %}
+        </div>
+    </div>
+
+    <ul class="class-list--list">
+        {% for Session in Course.UpcomingPublicSessions %}
+            {% if Session.public %}
+
+                <li class="class-list--item">
+                    {% include 'classes/includes/modal.html.twig' %}
+
+                    <dl class="class-list--content-list">
+                        <dt>Class Location</dt>
+
+                        {# Need to Add this slug #}
+                        {% if Session.Location %}
+                            <dd class="class-card--course-code">{{ Session.Location.slug }}</dd>
+                        {% else %}
+                            <dd class="class-list--course-code">N/A</dd>
+                        {% endif %}
+
+                        <dt>Course Date</dt>
+                        <dd class="class-list--date-1">{{ Session.date1|date("M d Y") }}, {{ Session.start_time1|date("h:i A") }} &ndash; {{ Session.end_time1|date("h:i A") }}</dd>
+
+                        {% if Session.date2 is not null %}
+                            <dt>Course Day Two</dt>
+                            <dd>{{ Session.date2|date("M d Y") }}, {{ Session.start_time2|date("h:i A") }} &ndash; {{ Session.end_time2|date("h:i A") }}</dd>
+                        {% endif %}
+
+                        {% set class_requirements = Course.bring_to_class_array %}
+
+
+                        <div class="class-list--button-container">
+                            {% if not Session.online_registration %}
+                                <button class="button__small" disabled><span class="hide-on-small-screens">Registration Unavailable</span></button>
+                            {% else %}
+                                {% if class_requirements|length %}
+                                    <button class="button__small" data-trigger="modal" data-session-id="{{ Session.id }}">Enroll<span class="hide-on-small-screens"> In Class</span></button>
+                                {% else %}
+                                    <a href="{{ path('enroll', {'course_slug': Course.slug, 'program_slug': Program.slug, 'session_id': Session.id}) }}" class="button__small" data-session-id="{{ Session.id }}">Enroll<span class="hide-on-small-screens"> In Class</span></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </dl>
+                </li>
+
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

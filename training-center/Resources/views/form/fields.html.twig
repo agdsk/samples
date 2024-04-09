@@ -1,0 +1,48 @@
+{% block form_row %}
+    {% spaceless %}
+        <fieldset class="form_row">
+            {{ form_errors(form) }}
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+        </fieldset>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{# Widgets #}
+
+{%- block form_widget -%}
+    {% if compound %}
+        {{- block('form_widget_compound') -}}
+    {% else %}
+        {{- block('form_widget_simple') -}}
+    {% endif %}
+{%- endblock form_widget -%}
+
+{%- block form_widget_simple -%}
+    {% if label is empty %}
+        {% set label = name|humanize|title %}
+    {% endif %}
+
+    {%- set type = type|default('text') -%}
+    <input id="{{ id }}" name="{{ full_name }}" type="{{ type }}" {{ block('attributes') }} {% if value %} value="{{ value }}" {% endif %} placeholder="{{ label }}"/>
+{%- endblock form_widget_simple -%}
+
+{%- block textarea_widget -%}
+    {% if label is empty %}
+        {% set label = name|humanize|title %}
+    {% endif %}
+
+    <textarea {{ block('widget_attributes') }} placeholder="{{ label }}">{{ value }}</textarea>
+{%- endblock textarea_widget -%}
+
+{# Rows #}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="form--errors-list">
+            {%- for error in errors -%}
+                <li class="form--error-item">{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}

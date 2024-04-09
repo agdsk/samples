@@ -1,0 +1,77 @@
+
+{# A student should only be able to attend if they are registered or pending #}
+{% if Enrollment.status == 'registered' or Enrollment.status == 'pending' %}
+
+  {# If a student has not attended or not attended #}
+  {% if not Enrollment.attendance %}
+      <td data-table-header="Attendance:" class="binary-forms-container">
+          <form class="ajax-form" method="POST"
+                action="{{ path('admin_student_attendance_pass') }}"
+                data-inital-action="{{ path('admin_student_attendance_pass') }}"
+                data-undo-action="{{ path('admin_student_attendance_undo') }}"
+                data-after-call="update-grade">
+
+              <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+              <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+              <button type="submit" data-state="active" data-copy="Show" data-sentiment="positive">Show</button>
+          </form>
+          <form class="ajax-form" method="POST"
+                action="{{ path('admin_student_attendance_fail') }}"
+                data-inital-action="{{ path('admin_student_attendance_fail') }}"
+                data-undo-action="{{ path('admin_student_attendance_undo') }}"
+                data-after-call="update-grade">
+
+              <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+              <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+              <button type="submit" data-state="active" data-copy="No Show" data-sentiment="negative">No Show</button>
+          </form>
+      </td>
+  {% else %}
+      <td data-table-header="Attendance:">
+          <form class="ajax-form" method="POST"
+                action="{{ path('admin_student_attendance_pass') }}"
+                data-inital-action="{{ path('admin_student_attendance_pass') }}"
+                data-undo-action="{{ path('admin_student_attendance_undo') }}"
+                data-after-call="update-grade">
+
+              <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+              <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+
+              {% if Enrollment.attendance == 'show' %}
+                  <button type="submit" data-state="selected" data-copy="Show" data-sentiment="positive">Show</button>
+              {% else %}
+                  <button disabled type="submit" data-state="inactive" data-copy="Show" data-sentiment="positive">Show</button>
+              {% endif %}
+          </form>
+
+          <form class="ajax-form" method="POST"
+                action="{{ path('admin_student_attendance_fail') }}"
+                data-inital-action="{{ path('admin_student_attendance_fail') }}"
+                data-undo-action="{{ path('admin_student_attendance_undo') }}"
+                data-after-call="update-grade">
+
+              <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+              <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+
+              {% if Enrollment.attendance == 'noshow' %}
+                  <button type="submit" data-state="selected" data-copy="No Show" data-sentiment="negative">No Show</button>
+              {% else %}
+                  <button disabled type="submit" data-state="inactive" data-copy="No Show" data-sentiment="negative">No Show</button>
+              {% endif %}
+          </form>
+      </td>
+  {% endif %}
+
+{% else %}
+
+  {# Cancelled or Cancel Pending people #}
+  <td data-table-header="Attendance:" class="binary-forms-container">
+      <form class="ajax-form" method="POST">
+          <button disabled>Show</button>
+      </form>
+      <form class="ajax-form" method="POST">
+          <button disabled=>No Show</button>
+      </form>
+  </td>
+
+{% endif %}

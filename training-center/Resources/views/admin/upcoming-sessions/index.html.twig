@@ -1,0 +1,89 @@
+{% set page_title = 'Admin - Upcoming Sessions' %}
+{% extends 'layout/admin.html.twig' %}
+{% set page_class = 'upcoming-sessions' %}
+
+{% block page_title %}Admin - Upcoming Sessions{% endblock %}
+
+{% block body %}
+    <h1>Upcoming Sessions</h1>
+
+    {% if Sessions is not empty %}
+    <table>
+
+        {# Header Column #}
+        <tr>
+            <th>Day</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th width="100%">Course</th>
+            <th>Students</th>
+            <th>Instructors</th>
+            <th>Action</th>
+        </tr>
+
+        {% for Session in Sessions %}
+        <tr data-row-header="{{ Session.Course.name }}">
+
+            {# Day #}
+            <td data-table-header="Day:">
+                {{ Session.date1|date("D") }}
+
+                {% if Session.date2 %}
+                    <br>
+                    {{ Session.date2|date("D") }}
+                {% endif %}
+            </td>
+
+            {# Date #}
+            <td data-table-header="Date:">
+                {{ Session.date1|date("m/d") }}
+
+                {% if Session.date2 %}
+                    <br>
+                    {{ Session.date2|date("m/d") }}
+                {% endif %}
+            </td>
+
+            {# Time #}
+            <td data-table-header="Time:">
+                {{ Session.start_time1|date("h:ia") }}
+
+                {% if Session.date2 %}
+                    <br>
+                    {{ Session.start_time2|date("h:ia") }}
+                {% endif %}
+            </td>
+
+            {# Course #}
+            <td data-table-header="Course:">{{ Session.Course.name }}</td>
+
+            {# Students #}
+            <td data-table-header="Students:">
+                {{ counts.enrollment[Session.id] }} / {{ Session.student_max }}
+
+                {% if counts.enrollment[Session.id] < Session.student_max %}
+                    <span style="color: red">⚠</span>
+                {% endif %}
+            </td>
+
+            {# Instructors #}
+            <td data-table-header="Instructors:">
+                {{ counts.instructors[Session.id] }} / {{ Session.instructor_max }}
+
+                {% if counts.instructors[Session.id] < Session.instructor_max %}
+                    <span style="color: red">⚠</span>
+                {% endif %}
+            </td>
+
+            {# Actions #}
+            <td data-table-header="Action:"><a class="button" href="{{ path('admin_session_overview', {'session_id' : Session.id}) }}">View</a></td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    {% else %}
+        <p>No Upcoming Sessions</p>
+    {% endif %}
+
+{% endblock %}

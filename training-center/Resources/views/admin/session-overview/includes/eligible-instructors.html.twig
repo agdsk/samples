@@ -1,0 +1,31 @@
+<h2 class="session-overview--header session-overview--header__normal-margin">Eligible Instructors</h2>
+
+<button class="hide-and-seek-toggle available-instructors-toggle" data-element-target-id="available-instructors-table" data-element-target-human-name="Instructors Table" data-state="hide">Show Instructors Table</button>
+<div class="hide-and-seek__hide available-instructors-table" id="available-instructors-table">
+    {% if AvailableInstructors|length %}
+        <table class="table__fixed">
+            <tr class="table-header-row">
+                <th id="id-column" class="table-cell__small">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th class="table-cell__medium">Action</th>
+            </tr>
+            {% for Instructor in AvailableInstructors %}
+                <tr data-row-header="{{ Instructor.display_name }}">
+                    <td data-table-header="ID:">{{ Instructor.id }}</td>
+                    <td data-table-header="Name:">{{ Instructor.display_name }}</td>
+                    <td data-table-header="Email:">{{ Instructor.email }}</td>
+                    <td data-table-header="Action:">
+                        <form method="POST" action="{{ path('admin_add_instructor') }}">
+                            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                            <input type="hidden" name="user_id" value="{{ Instructor.id }}"/>
+                            <button type="submit" style="margin-top: 0;">Add</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="muted">No Available Instructors</p>
+    {% endif %}
+</div>

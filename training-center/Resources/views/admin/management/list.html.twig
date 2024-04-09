@@ -1,0 +1,19 @@
+{% set page_title = 'Admin - System Management' %}
+{% extends 'layout/admin.html.twig' %}
+
+{% block body %}
+    <h1>System Management</h1>
+
+    <ul class="system-management-links">
+        <li><a href="{{ path('app_management_certificationmanager_index') }}">Certifications</a></li>
+        <li><a href="{{ path('app_management_coursemanager_index') }}">Courses</a></li>
+        <li><a href="{{ path('app_management_enrollmentmanager_index') }}">Enrollments</a></li>
+        <li><a href="{{ path('app_management_invoicemanager_index') }}">Invoices</a></li>
+        <li><a href="{{ path('app_management_locationmanager_index') }}">Locations</a></li>
+        <li><a href="{{ path('app_management_materialmanager_index') }}">Materials</a></li>
+        <li><a href="{{ path('app_management_programmanager_index') }}">Programs</a></li>
+        <li><a href="{{ path('app_management_sessionmanager_index') }}">Sessions</a></li>
+        <li><a href="{{ path('app_management_usermanager_index') }}">Users</a></li>
+        <li><a href="{{ path('app_management_usercertificationmanager_index') }}">User Certifications</a></li>
+    </ul>
+{% endblock %}

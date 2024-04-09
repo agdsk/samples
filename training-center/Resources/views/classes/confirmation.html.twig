@@ -1,0 +1,101 @@
+{% set page_title = 'Confirmation' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <div class="enrollment--header">
+        <div class="enrollment--header-copy-container">
+            {% if Enrollment.status == 'registered' %}
+                <h1>Can&rsquo;t wait to see you {{ app.User.first_name }}</h1>
+            {% else %}
+                <h1>Thank you for enrolling, your Registration is Pending.</h1>
+            {% endif %}
+
+            {% if Enrollment.status == 'registered' %}
+                <p>You&rsquo;ve been enrolled, and a confirmation email has been sent to {{ app.User.email }}</p>
+            {% else %}
+                <p>Your seat has been reserved for this session but your registration has not been approved. When a FHTC administrator has registration, you will receive an email at {{ app.User.email }} with information regarding it's approval status.</p>
+            {% endif %}
+            <p>Course check-in will begin 30 minutes prior to the class start time</p>
+        </div>
+
+        {% if Enrollment.status == 'registered' %}
+            <button class="button" onclick="window.print();">Print</button>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    {% if Enrollment.status == 'registered' or 'pending' %}
+        <div class="enrollment-receipt">
+            <dl class="enrollment-receipt--list">
+                <dt class="enrollment-receipt--term">Student:</dt><dd class="enrollment-receipt--description">{{ app.User.display_name }}</dd>
+                <dt class="enrollment-receipt--term">Confirmation Number:</dt><dd class="enrollment-receipt--description">{{ Enrollment.id }}</dd>
+
+                {% if Enrollment.transid %}
+                    <dt class="enrollment-receipt--term">Transaction ID:</dt><dd class="enrollment-receipt--description">{{ Enrollment.transid }}</dd>
+                {% endif %}
+
+                <dt class="enrollment-receipt--term">Enrollment Status:</dt><dd class="enrollment-receipt--description">{{ Enrollment.status|capitalize }}</dd>
+
+                {% if Enrollment.payment_method %}
+                    <dt class="enrollment-receipt--term">Payment Method:</dt><dd class="enrollment-receipt--description">{{ Enrollment.payment_method|capitalize }}</dd>
+                {% endif %}
+
+                {% if Enrollment.created_at %}
+                    <dt class="enrollment-receipt--term">Transaction Date:</dt><dd class="enrollment-receipt--description">{{ Enrollment.created_at|date('M d, Y - G:i:s') }}</dd>
+                {% endif %}
+
+                {% if Enrollment.card_number %}
+                    <dt class="enrollment-receipt--term">Card Number:</dt><dd class="enrollment-receipt--description">**** **** **** {{ Enrollment.card_number }}</dd>
+                {% endif %}
+
+                {% if Enrollment.cost_center %}
+                    <dt class="enrollment-receipt--term">Cost Center:</dt><dd class="enrollment-receipt--description">{{ Enrollment.cost_center }}</dd>
+                {% endif %}
+
+                {% if Enrollment.manager_name %}
+                    <dt class="enrollment-receipt--term">Manager Name:</dt><dd class="enrollment-receipt--description">{{ Enrollment.manager_name }}</dd>
+                {% endif %}
+
+                {% if Enrollment.manager_contact %}
+                    <dt class="enrollment-receipt--term">Manager Contact Info:</dt><dd class="enrollment-receipt--description">{{ Enrollment.manager_contact }}</dd>
+                {% endif %}
+
+                <dt class="enrollment-receipt--term">Cost</dt><dd class="enrollment-receipt--description">${{ Enrollment.cost }}</dd>
+            </dl>
+        </div>
+    {% endif %}
+
+    <hr>
+
+    {% if Enrollment.Session.Course.before_class_array|length %}
+        <h2>What to do before your class</h2>
+
+        <ul class="copy">
+            {% for item in Enrollment.Session.Course.before_class_array %}
+                {% if item %}
+                    <li>{{ item }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if Enrollment.Session.Course.bring_to_class_array|length %}
+        <h2>What to bring to your class</h2>
+
+        <ul class="copy">
+            {% for item in Enrollment.Session.Course.bring_to_class_array %}
+                {% if item %}
+                    <li>{{ item }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if Enrollment.status == 'registered' or 'pending' %}
+        <a href="{{ path('my_classes') }}" style="margin-top: 1.68rem" class="button">Go To My Classes</a>
+    {% else %}
+        <a href="/" style="margin-top: 1.68rem" class="button">Return Home</a>
+    {% endif %}
+
+{% endblock %}

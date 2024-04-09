@@ -1,0 +1,17 @@
+{% set page_title = 'Admin - Users' %}
+{% extends 'layout/admin.html.twig' %}
+
+{% set page_class = 'site-settings' %}
+
+{% block body %}
+    <h1 style="margin-bottom: 1rem;">Site Settings</h1>
+
+    <div id="markdown-editor-container" class="form--container">
+       <p>Enter a notice to display on the homepage</p>
+        {{ form(form) }}
+    </div>
+
+    <div id="markdown-to-html-preview-container" class="html-preview html-preview__inactive course-detail">
+     <div id="markdown-to-html-preview-text-container" class="html-preview-text-container"></div>
+    </div>
+{% endblock %}

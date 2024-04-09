@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Full Sail University - Web Developer Test</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    /* Navigation is sticky only for the first X pixels, then reverts to relative */
+    var offset = 400;
+
+    window.onscroll = function () {
+        var nav = document.getElementById('nav');
+
+        if (scrollY > offset) {
+            nav.style.position = 'relative';
+            nav.style.top = offset + 'px';
+        } else {
+            nav.style.position = 'sticky';
+            nav.style.top = '0';
+        }
+    };
+</script>
+<nav id="nav">
+    <div class="container">
+        <a href="https://www.fullsail.edu/" class="logo" aria-label="Primary Nav: Full Sail University">
+            <img srcset="img/logo-color.png, img/logo-color@2x.png 2x" alt="Full Sail University">
+        </a>
+
+        <a class="menu">
+            <img srcset="img/icon-info.png, img/icon-info@2x.png 2x" alt="More information">
+        </a>
+    </div>
+</nav>
+
+<main>
+    <div class="column1">
+        <div class="intro">
+            <h1>Primary Headline</h1>
+            <h2>Secondary Headline</h2>
+        </div>
+        <div class="description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus risus metus. Aliquam blandit magna nec turpis mattis accumsan. Mauris eu semper neque. Mauris fringilla, mauris sit amet viverra hendrerit, purus lorem vestibulum ligula, at consequat urna lorem at felis. Phasellus accumsan pulvinar ipsum, <b>quis semper dui mollis ac.</b> Donec et turpis ut sem lobortis blandit in vel neque. Quisque luctus nisl vel dolor rutrum tempor. Donec iaculis facilisis lectus, in pellentesque risus sollicitudin vel. In in augue sed lectus semper feugiat. Nunc a dapibus sem. In ac ultricies sapien.</p>
+        </div>
+        <div class="details">
+            <h3>Item Detail</h3>
+            <p>Aliquam lacus sem, lobortis et risus sed, congue egestas nulla. Morbi vel leo tellus. Phasellus elit sapien, varius vel nunc ac, fringilla ullamcorper massa. Vestibulum faucibus rutrum felis, a sollicitudin est rhoncus quis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam eget arcu quis ante tincidunt dignissim.</p>
+            <a href="#form">Request Additional Information</a>
+        </div>
+    </div>
+    <div class="column2">
+        <form id="form">
+            <h3>Request Info</h3>
+            <p>Fill out the form for more information or call us at <a href="tel:8447161492">844.716.1492</a>.</p>
+            <hr>
+            <fieldset class="required">
+                <label for="program">Select One:</label>
+                <select id="program" name="program">
+                    <option>Choose program</option>
+                </select>
+            </fieldset>
+            <fieldset class="required">
+                <label for="name">Your Name</label>
+                <input id="name" name="" type="text" placeholder="Your Name">
+            </fieldset>
+            <fieldset>
+                <label>Checkboxes</label>
+                <label><input type="checkbox"> Box 1</label>
+                <label><input type="checkbox"> Box 2</label>
+                <label><input type="checkbox"> Box 3</label>
+            </fieldset>
+            <button type="submit">Submit Request</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <a href="https://www.fullsail.edu/" class="logo" aria-label="Footer: Full Sail University">
+            <img srcset="img/logo-white.png, img/logo-white@2x.png 2x" alt="Full Sail University">
+        </a>
+
+        <div class="tagline">If you’re serious about your dream, we’ll take your dream seriously.<sup>TM</sup></div>
+
+        <div class="legal">
+            <p>For more information about Full Sail’s programs, courses, and studios, as well as details about financial aid and career development, please visit our website at <a href="http://www.fullsail.edu">www.fullsail.edu</a></p>
+            <p>3300 University Blvd - Winter Park, FL 32792 - Financial aid available for those who qualify - Career development assistance · Accredited University, ACCSC</p>
+            <p>Other product and company names mentioned herein may be the trademarks of their respective owners.</p>
+            <p>The appearance of these marks does not necessarily indicate a formalized sponsorship or affiliation with other such companies.</p>
+            <p>The terms “Full Sail,” “Full Sail University,” and the Full Sail logo are either registered service marks or services marks of Full Sail, LLC.</p>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2024 Full Sail, LLC. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

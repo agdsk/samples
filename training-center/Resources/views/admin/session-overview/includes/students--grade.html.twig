@@ -1,0 +1,98 @@
+{% if Enrollment.attendance == 'show' or Enrollment.attendance == 'noshow' %}
+
+  {% if Enrollment.grade == null %}
+      {% if Enrollment.attendance == 'show' %}
+        <td data-table-header="Grade:" class="binary-forms-container">
+            <form class="ajax-form grade-form" method="POST"
+                  action="{{ path('admin_student_grade_pass') }}"
+                  data-inital-action="{{ path('admin_student_grade_pass') }}"
+                  data-undo-action="{{ path('admin_student_grade_undo') }}">
+
+                <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+                <button type="submit" data-state="active" data-copy="Pass" data-sentiment="positive">Pass</button>
+            </form>
+            <form class="ajax-form grade-form" method="POST"
+                  action="{{ path('admin_student_grade_fail') }}"
+                  data-inital-action="{{ path('admin_student_grade_fail') }}"
+                  data-undo-action="{{ path('admin_student_grade_undo') }}">
+                <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+                <button type="submit" data-state="active" data-copy="Fail" data-sentiment="negative">Fail</button>
+            </form>
+        </td>
+      {% else %}
+        <td data-table-header="Grade:" class="binary-forms-container">
+            <form class="ajax-form grade-form" method="POST"
+                  action="{{ path('admin_student_grade_pass') }}"
+                  data-inital-action="{{ path('admin_student_grade_pass') }}"
+                  data-undo-action="{{ path('admin_student_grade_undo') }}">
+
+                <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+                <button disabled type="submit" data-state="active" data-copy="Pass" data-sentiment="positive">Pass</button>
+            </form>
+            <form class="ajax-form grade-form" method="POST"
+                  action="{{ path('admin_student_grade_fail') }}"
+                  data-inital-action="{{ path('admin_student_grade_fail') }}"
+                  data-undo-action="{{ path('admin_student_grade_undo') }}">
+                <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+                <button disabled type="submit" data-state="active" data-copy="Fail" data-sentiment="negative">Fail</button>
+            </form>
+        </td>
+      {% endif %}
+  {% else %}
+      <td data-table-header="Grade:">
+          <form class="ajax-form grade-form" method="POST"
+                action="{{ path('admin_student_grade_pass') }}"
+                data-inital-action="{{ path('admin_student_grade_pass') }}"
+                data-undo-action="{{ path('admin_student_grade_undo') }}">
+
+              <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+              <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+
+              {% if Enrollment.grade == 'pass' %}
+                  <button type="submit" data-state="selected" data-copy="Pass" data-sentiment="positive">Pass</button>
+              {% else %}
+                  <button disabled type="submit" data-state="inactive" data-copy="Pass" data-sentiment="positive">Pass</button>
+              {% endif %}
+          </form>
+          <form class="ajax-form grade-form" method="POST"
+                action="{{ path('admin_student_grade_fail') }}"
+                data-inital-action="{{ path('admin_student_grade_fail') }}"
+                data-undo-action="{{ path('admin_student_grade_undo') }}">
+
+              <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+              <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+
+              {% if Enrollment.grade == 'fail' %}
+                  <button type="submit" data-state="selected" data-copy="Fail" data-sentiment="negative">Fail</button>
+              {% else %}
+                  <button disabled type="submit" data-state="inactive" data-copy="Fail" data-sentiment="negative">Fail</button>
+              {% endif %}
+          </form>
+      </td>
+  {% endif %}
+
+{% else %}
+    <td data-table-header="Grade:" class="binary-forms-container">
+        <form class="ajax-form grade-form" method="POST"
+              action="{{ path('admin_student_grade_pass') }}"
+              data-inital-action="{{ path('admin_student_grade_pass') }}"
+              data-undo-action="{{ path('admin_student_grade_undo') }}">
+
+            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+            <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+            <button disabled type="submit" data-state="inactive" data-copy="Pass" data-sentiment="positive">Pass</button>
+        </form>
+        <form class="ajax-form grade-form" method="POST"
+              action="{{ path('admin_student_grade_fail') }}"
+              data-inital-action="{{ path('admin_student_grade_fail') }}"
+              data-undo-action="{{ path('admin_student_grade_undo') }}">
+            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+            <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+            <button disabled type="submit" data-state="inactive" data-copy="Fail" data-sentiment="negative">Fail</button>
+        </form>
+    </td>
+{% endif %}

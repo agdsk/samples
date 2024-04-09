@@ -1,0 +1,126 @@
+{% set page_title = Course.name %}
+{% extends 'layout/standard.html.twig' %}
+{% set page_class = 'course-detail' %}
+
+{% if Course.overview == null or Course.overview == '' %}
+    {% set additional_course_header_class = 'course-detail--header__vertically-center' %}
+{% else %}
+    {% set additional_course_header_class = '' %}
+{% endif %}
+
+{% block body %}
+
+    <div class="course-detail--header {{ additional_course_header_class }}">
+        <div class="course-detail--header-part-one">
+            <h1>{{ Course.name }}</h1>
+
+            <div class="markdown">
+                {{ Course.overview|markdown }}
+            </div>
+        </div>
+        <div class="course-detail--header-part-two">
+            {% include 'classes/includes/class_price.html.twig' %}
+
+            {% if Course.UpcomingPublicSessions.count %}
+                <a href="{{ path('classes', {'program_slug' : Program.slug, 'course_slug' : Course.slug}) }}" class="button view-classes-button">View Classes</a>
+            {% else %}
+                <button class="button view-classes-button" disabled>No Classes Available</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+
+    {% if Course.description %}
+        <h2>Description</h2>
+
+        <div class="markdown">
+            {{ Course.description|markdown }}
+        </div>
+    {% endif %}
+
+    {% if Course.intended_audience_array is not empty %}
+        <h2>Intended Audience</h2>
+
+        <div class="markdown">
+            {{ Course.instruction_intended_audience|markdown }}
+        </div>
+    {% endif %}
+
+    {% if Course.prerequisites_array is not empty %}
+        <h2>Prerequisites</h2>
+
+        <div class="markdown">
+            {{ Course.instruction_prerequisites|markdown }}
+        </div>
+    {% endif %}
+
+    {% if Course.Materials is not empty %}
+        <h2>Required Materials:</h2>
+
+        {% if not Course.and_or_materials or Course.and_or_materials == 'and' %}
+            <p><strong>All</strong> the following material(s) are needed for the course:</p>
+        {% else %}
+            <p>Only <strong>one</strong> of the following books are required for the course:</p>
+        {% endif %}
+
+        <div class="markdown">
+            {% for item in Course.Materials %}
+                <dl>
+                    {% if item.name %}
+                        <dt>Name</dt><dd>{{ item.name }}</dd>
+                    {% endif %}
+
+                    {% if item.isbn13 %}
+                        <dt>ISBN</dt><dd>{{ item.isbn13 }}</dd>
+                    {% endif %}
+                    
+                    {% if item.rentable == 1 and Course.rentable == 1 %}
+                        <dt>Rent Cost</dt><dd>${{ item.rent_cost }} | Rentals are only available to FLH employees, and must be picked up the day before your class starts.</dd>
+                    {% endif %}
+
+                    {% if item.purchase_cost %}
+                        <dt>Purchase Cost</dt><dd>${{ item.purchase_cost }}</dd>
+                    {% endif %}
+                    
+                    {% if item.isbn_simple %}
+                        <dt>Cover Image</dt>
+                        <dd>
+                            <a class="hide-and-seek-toggle" href="javascript:void(0);" data-element-target-id="text-book--{{ item.isbn10 }}" data-element-target-human-name="Cover" data-state="hide">View Cover</a>
+                            <div id="text-book--{{ item.isbn10 }}" class="text-book--container hide-and-seek__hide" data-state="hide">
+                                <img src="http://www.directtextbook.com/large/{{ item.isbn_simple }}.jpg" alt="textbook cover">
+                            </div>
+                        </dd>
+                    {% endif %}
+
+                </dl>
+
+                {% if not loop.last %}
+                    <p><b>{{ Course.and_or_materials }}</b></p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if Course.before_class_array is not empty %}
+        <h2>What to do before the class</h2>
+
+        <div class="markdown">
+            {{ Course.instruction_before_class|markdown }}
+        </div>
+    {% endif %}
+
+    {% if Course.bring_to_class_array is not empty %}
+        <h2>What to bring to the class</h2>
+
+        <div class="markdown">
+            {{ Course.instruction_bring_to_class|markdown }}
+        </div>
+    {% endif %}
+
+    <hr>
+
+    <h2>Disclaimer</h2>
+
+    <p>The American Heart Association strongly promotes knowledge and proficiency in all AHA courses and has developed instructional materials for this purpose. Use of these materials in an educational course does not represent course sponsorship by the AHA. Any fees charged for such a course, except for a portion of fees needed for AHA course materials, do not represent income to the AHA.</p>
+{% endblock %}

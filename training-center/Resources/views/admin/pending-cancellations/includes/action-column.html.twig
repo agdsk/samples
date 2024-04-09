@@ -1,0 +1,9 @@
+<td data-table-header="Action:" class="binary-forms-container">
+    <a class="button" href="{{ path('app_management_enrollmentmanager_edit', { 'id' : Enrollment.id }) }}">Edit</a>
+
+    <form class="ajax-form" method="POST"
+        action="{{ path('pending_cancellations_cancel', {enrollment_id: Enrollment.id}) }}"
+        data-inital-action="{{ path('pending_cancellations_cancel', {enrollment_id: Enrollment.id}) }}" style="display: inline-block">
+        <button  data-state="active" data-copy="Cancel" data-sentiment="negative" type="submit">Cancel</button>
+    </form>
+</td>

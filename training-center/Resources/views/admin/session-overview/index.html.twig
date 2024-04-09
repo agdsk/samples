@@ -1,0 +1,35 @@
+{% set page_title = 'Admin - Session Overview' %}
+{% extends 'layout/admin.html.twig' %}
+{% set page_class = 'session-overview' %}
+
+{% block body %}
+
+    <div class="header-detail--container">
+
+        <h1>{{ Session.Course.name }}</h1>
+
+        {# Button Container #}
+        {% include 'admin/session-overview/includes/utility-buttons.html.twig' %}
+
+        {# Details #}
+        {% include 'admin/session-overview/includes/details.html.twig' %}
+
+    </div>
+
+    {# Eligible Instructors Table #}
+    {% include 'admin/session-overview/includes/eligible-instructors.html.twig' %}
+
+    {# Assigned Instructors Table #}
+    {% include 'admin/session-overview/includes/assigned-instructors.html.twig' %}
+
+    {# Students #}
+    {% include 'admin/session-overview/includes/students.html.twig' %}
+
+
+    <hr/>
+
+    {# Bulk Email #}
+    {% include 'admin/session-overview/includes/bulk-email.html.twig' %}
+
+
+{% endblock %}

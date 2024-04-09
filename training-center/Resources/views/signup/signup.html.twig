@@ -1,0 +1,14 @@
+{% set page_title = 'Sign Up' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <section class="boxy-form">
+        <h1>Signup</h1>
+
+        <p><strong>Florida Hospital Employees</strong><br>You do not need to create an account. You can already <a href="{{ path('login') }}" tabindex="-1">login</a> using your OpID.</p>
+
+        <p><strong>Non-Employees</strong><br>Create an account to enroll in courses at the Florida Hospital American Heart Association Training Center.</p>
+
+        {{ form(form) }}
+    </section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% set page_title = 'Billing' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <div class="form--container">
+        <h3 class="form--header">Pay With Credit Card</h3>
+
+        <p>To pay for this course with a credit card, you will be directed to a third party credit card processing system.</p>
+
+        <form method="POST" action="https://vault.trustcommerce.com/trustee/payment.php">
+            <input type="hidden" name="token" value="{{ token }}">
+            <input type="hidden" name="ticket" value="{{ ticket }}">
+            <input type="hidden" name="amount" value="{{ amount }}">
+
+            <button type="submit">Proceed to Payment</button>
+        </form>
+
+        {% if is_granted('ROLE_EMPLOYEE') %}
+            <p><a href="{{ path('enroll_with_bill_to_unit', {'course_slug': Course.slug, 'program_slug': Program.slug, 'session_id': app.request.get('session_id')}) }}">Pay by Bill My Unit</a></p>
+        {% endif %}
+    </div>
+{% endblock %}

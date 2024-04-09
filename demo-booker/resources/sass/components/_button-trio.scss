@@ -1,0 +1,21 @@
+.button-trio {
+    @extend .clearfix;
+
+    button {
+        width : 33%;
+    }
+
+    button:nth-child(1) {
+        float : left;
+    }
+
+    button:nth-child(2) {
+        margin-left  : .5%;
+        float        : left;
+        margin-right : .5%;
+    }
+
+    button:nth-child(3) {
+        float : left;
+    }
+}

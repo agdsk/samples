@@ -1,0 +1,22 @@
+{% include 'layout/includes/header.html.twig' %}
+
+<body>
+
+    {% include 'layout/includes/flash-notice.html.twig' %}
+
+    <div class="wrapper">
+        {% include 'layout/includes/mobile_toolbar.html.twig' %}
+
+        {% include 'layout/includes/sidebar.html.twig' %}
+
+        <main>
+            {% include 'layout/includes/breadcrumbs.html.twig' %}
+
+
+            <div class="content-container {{ page_class|default('') }}">
+                {{ block('body') }}
+            </div>
+        </main>
+    </div>
+
+{% include 'layout/includes/footer.html.twig' %}

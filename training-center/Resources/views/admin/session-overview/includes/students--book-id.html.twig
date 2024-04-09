@@ -1,0 +1,8 @@
+<td data-table-header="Book ID:">
+    <form method="POST" action="{{ path('admin_student_set_book') }}">
+        <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+        <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+        <input class="book-id" type="number" value="{{ Enrollment.book_id }}" name="book_id" placeholder="ID"/>
+        <button type="submit">Set</button>
+    </form>
+</td>

@@ -1,0 +1,9 @@
+<p>
+    {{ Session.date1|date("l, F j, Y") }} &mdash; {{ Session.start_time1|date("g:ia") }} to {{ Session.end_time1|date("g:ia") }}<br>
+
+    {% if Session.date2 %}
+        {{ Session.date2|date("l, F j, Y") }} &mdash; {{ Session.start_time2|date("g:ia") }} to {{ Session.end_time2|date("g:ia") }}<br>
+    {% endif %}
+
+    {{ Session.Location.name }}
+</p>

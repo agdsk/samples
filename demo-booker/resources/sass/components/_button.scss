@@ -1,0 +1,41 @@
+.button {
+    font-family     : AcmeSans-SemiBold;
+    user-select     : none;
+    background      : #FFFFFF;
+    border          : 2px solid #1C1E20;
+    border-radius   : 25px;
+    font-size       : 14px;
+    line-height     : 30px;
+    color           : #1C1E20;
+    padding         : 0 33px;
+    cursor          : pointer;
+    text-align      : center;
+    text-decoration : none;
+    display         : inline-block;
+
+    &--taller {
+        line-height : 44px;
+    }
+
+    &--helpful {
+        border-color : #1574D4;
+        color        : #1574D4;
+    }
+
+    &--warning {
+        border : 2px solid #D74E4E;
+        color  : #D74E4E;
+    }
+
+    &--black {
+        background-color : #000;
+        color            : #fff;
+    }
+
+    &--checked {
+        border        : 2px solid #D2D2D2;
+        border-radius : 25px;
+        color         : transparent;
+        background    : #F0F0F0 url('/images/checkmark-grey.png') no-repeat center;
+    }
+}

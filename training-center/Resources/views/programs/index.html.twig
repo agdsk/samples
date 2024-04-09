@@ -1,0 +1,24 @@
+{% set page_title = 'Programs' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <h1>Choose a Program</h1>
+    <p>Use the Find Courses tool to find classroom courses &amp; skill sessions at a Training Center near you.</p>
+
+    <ul class="card--list">
+        {% for Program in Programs %}
+            <li class="card--item" data-card-code="{{ Program.slug }}">
+                <div class="card--main">
+                    <div class="card--body">
+                        <h3 class="card--title">{{ Program.name }}</h3>
+                    </div>
+                    <div class="card--links">
+                        <a href="{{ path('courses', { 'program_slug': Program.slug }) }}" class="card--cta">Find courses</a>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+            <li>There are no programs available</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

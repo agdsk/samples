@@ -1,0 +1,20 @@
+{% set page_title = 'Admin - Bulk Enroll' %}
+{% extends 'layout/admin.html.twig' %}
+{% set page_class = 'bulk-enroll' %}
+
+{% block body %}
+
+    <div class="admin-header-container">
+        <h1>Bulk Enroll</h1>
+        <a class="button--tertiary" href="{{ path('bulk_upload_template') }}" download>Download Template</a>
+    </div>
+
+    <hr>
+
+    <p style="margin-bottom: 0;">Upload a CSV file to easily enroll a large amount of students.</p>
+
+	<div class="file-upload-form">
+		{{ form(form) }}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+<div class="header-button-set">
+    <a href="{{ path('admin_export_roster', {'session_id': Session.id}) }}" target="_blank" class="button">Export Class Roster</a>
+    <a href="{{ path('bulk_enroll', {'session_id': Session.id}) }}" class="button">Bulk Enroll</a>
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('app_management_sessionmanager_edit', {'id': Session.id}) }}" class="button">Edit</a>
+    {% endif %}
+</div>

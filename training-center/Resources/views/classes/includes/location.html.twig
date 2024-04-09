@@ -1,0 +1,12 @@
+<div class="card--address">
+    <a href="{{ Location.google_map_url }}" target="_blank">
+        {{ Location.name }}<br>
+        {{ Location.address1 }}<br>
+
+        {% if Location.address2 %}
+            {{ Location.address2 }}<br>
+        {% endif %}
+
+        {{ Location.city }}, {{ Location.state }} {{ Location.zip }}
+    </a>
+</div>

@@ -1,0 +1,179 @@
+{% set page_title = 'Admin - Users' %}
+{% extends 'layout/admin.html.twig' %}
+
+{% block page_title %}Admin - Upcoming Enrollment.Sessions{% endblock %}
+
+{% block body %}
+
+    <h1>{{ User.display_name }}</h1>
+
+    <a class="button" href="{{ path('app_management_usermanager_edit', {'id' : User.id}) }}">Edit</a>
+
+    <dl>
+        <dt>OpID</dt><dd>{{ User.opid|default('-') }}</dd>
+        <dt>Employee ID</dt><dd>{{ User.employee_id|default('-') }}</dd>
+        <dt>Email</dt><dd>{{ User.email|default('-') }}</dd>
+        <dt>Title</dt><dd>{{ User.title|default('-') }}</dd>
+        <dt>Department</dt><dd>{{ User.department|default('-') }}</dd>
+        <dt>Role</dt><dd>{{ User.role }}</dd>
+        <dt>Phone</dt><dd>{{ User.phone|default('-') }}</dd>
+        <dt>Address 1</dt><dd>{{ User.address1|default('-') }}</dd>
+        <dt>Address 2</dt><dd>{{ User.address2|default('-') }}</dd>
+        <dt>City</dt><dd>{{ User.city|default('-') }}</dd>
+        <dt>State</dt><dd>{{ User.state|default('-') }}</dd>
+        <dt>Country</dt><dd>{{ User.country|default('-') }}</dd>
+    </dl>
+
+    {% if InstructorAssignments is not empty %}
+        <h2>Assignments</h2>
+
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th width="100%">Course</th>
+                <th>Attendance</th>
+                <th>Action</th>
+            </tr>
+            {% for InstructorAssignment in InstructorAssignments %}
+                <tr data-row-header="{{ InstructorAssignment.Session.Course.name }}">
+                    <td data-table-header="Day:">
+                        {{ InstructorAssignment.Session.date1|date("D") }}
+
+                        {% if InstructorAssignment.Session.date2 %}
+                            <br>
+                            {{ InstructorAssignment.Session.date2|date("D") }}
+                        {% endif %}
+                    </td>
+
+                    <td data-table-header="Date:">
+                        {{ InstructorAssignment.Session.date1|date("m/d/y") }}
+
+                        {% if InstructorAssignment.Session.date2 %}
+                            <br>
+                            {{ InstructorAssignment.Session.date2|date("m/d/y") }}
+                        {% endif %}
+                    </td>
+
+                    <td data-table-header="Time:">
+                        {{ InstructorAssignment.Session.start_time1|date("h:ia") }}
+
+                        {% if InstructorAssignment.Session.date2 %}
+                            <br>
+                            {{ InstructorAssignment.Session.start_time2|date("h:ia") }}
+                        {% endif %}
+                    </td>
+
+                    <td data-table-header="Course:">{{ InstructorAssignment.Session.Course.name }}</td>
+                    <td data-table-header="Attendance:">{{ InstructorAssignment.attendance|capitalize }}</td>
+                    <td data-table-header="Action:">
+                        <a class="button" href="{{ path('admin_session_overview', {'session_id' : InstructorAssignment.Session.id}) }}">View Class</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if Enrollments is not empty %}
+        <h2>Enrollments</h2>
+
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th width="100%">Course</th>
+                <th>Status</th>
+                <th>Attendance</th>
+                <th>Grade</th>
+                <th></th>
+            </tr>
+            {% for Enrollment in Enrollments %}
+                <tr data-row-header="{{ Enrollment.Session.Course.name }}">
+                    <td data-table-header="Day:">
+                        {{ Enrollment.Session.date1|date("D") }}
+
+                        {% if Enrollment.Session.date2 %}
+                            <br>
+                            {{ Enrollment.Session.date2|date("D") }}
+                        {% endif %}
+                    </td>
+
+                    <td data-table-header="Date:">
+                        {{ Enrollment.Session.date1|date("m/d/y") }}
+
+                        {% if Enrollment.Session.date2 %}
+                            <br>
+                            {{ Enrollment.Session.date2|date("m/d/y") }}
+                        {% endif %}
+                    </td>
+
+                    <td data-table-header="Time:">
+                        {{ Enrollment.Session.start_time1|date("h:ia") }}
+
+                        {% if Enrollment.Session.date2 %}
+                            <br>
+                            {{ Enrollment.Session.start_time2|date("h:ia") }}
+                        {% endif %}
+                    </td>
+
+                    <td data-table-header="Course:">{{ Enrollment.Session.Course.name }}</td>
+                    <td data-table-header="Status:">{{ Enrollment.status|capitalize }}</td>
+                    <td data-table-header="Attendance:">{{ Enrollment.attendance|capitalize }}</td>
+                    <td data-table-header="Grade:">{{ Enrollment.grade|capitalize }}</td>
+                    <td data-table-header="Action:">
+                        <a class="button" href="{{ path('app_management_enrollmentmanager_edit', {'id' : Enrollment.id}) }}">Edit</a>
+                        <a class="button" href="{{ path('admin_session_overview', {'session_id' : Enrollment.Session.id}) }}">View Class</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if UserCertifications is not empty %}
+        <h2>Certifications</h2>
+
+        <table>
+            <tr>
+                <th>Certification</th>
+                <th>Issued</th>
+                <th>Expires</th>
+                <th>Action</th>
+            </tr>
+            {% for UserCertification in UserCertifications %}
+                <tr>
+                    <td data-table-header="Certification:" width="100%">{{ UserCertification.Certification.name }}</td>
+                    <td data-table-header="Issued:">{{ UserCertification.issued_at|date("m/d/y") }}</td>
+                    <td data-table-header="Expires:">{{ UserCertification.expires_at|date("m/d/y") }}</td>
+                    <td data-table-header="Action:">
+                        <a class="button" href="{{ path('app_management_usercertificationmanager_edit', {'id' : UserCertification.id}) }}">Edit</a>
+                        <a class="button" href="{{ path('admin_session_overview', {'session_id' : UserCertification.session_id}) }}">View Class</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if EmailLogs is not empty %}
+        <h2>Email Notifications</h2>
+
+        <table>
+            <tr>
+                <th>Email Date</th>
+                <th>Email Type</th>
+                <th>Subject</th>
+                <th>Email Address</th>
+            </tr>
+            {% for EmailLog in EmailLogs %}
+                <tr>
+                    <td data-table-header="Email Date:">{{ EmailLog.created_at|date("m/d/y") }}</td>
+                    <td data-table-header="Email Type:">{{ EmailLog.key }}</td>
+                    <td data-table-header="Email Subject:">{{ EmailLog.subject }}</td>
+                    <td data-table-header="Email Address:">{{ EmailLog.email }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock %}

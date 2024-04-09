@@ -1,0 +1,27 @@
+{% set page_title = Program.name ~ ' - Courses' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <h1>{{ Program.name }}</h1>
+
+    <div class="markdown">
+        {{ Program.overview|markdown }}
+    </div>
+
+    <ul class="card--list">
+        {% for Course in Courses %}
+            <li class="card--item" data-card-code="{{ Program.slug }}">
+                <div class="card--main">
+                    <div class="card--body">
+                        <h3 class="card--title">{{ Course.name }}</h3>
+                    </div>
+                    <div class="card--links">
+                        <a href="{{ path('course_detail', {'course_slug': Course.slug, 'program_slug': Program.slug}) }}" class="card--cta">View Course Details</a>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+            <li>There are no courses available for this program. </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% if is_granted('ROLE_EMPLOYEE') %}
+    <span class="course-detail--price">${{ Course.cost_employee }}</span>
+    <span class="course-detail--price-disclaimer">FH employee price</span>
+{% else %}
+    <span class="course-detail--price">${{ Course.cost_public }}</span>
+    <span class="course-detail--price-disclaimer">Non-employee price</span>
+{% endif %}

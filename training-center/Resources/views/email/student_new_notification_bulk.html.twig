@@ -1,0 +1,13 @@
+{% extends 'layout/email.html.twig' %}
+
+{% block title %}Admin Update: FHTC {{ Session.Course.name }}{% endblock %}
+
+{% block body %}
+  <h1 style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 200; margin: 40px 0 14px; padding: 0;">Admin Update: FHTC {{ Session.Course.name }}</h1>
+        <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 21px; padding: 0;">Your administrator has sent a message to all students and instructors in the session for {{ Session.Course.name }} on {{ Session.date1|date('l, F d') }} at {{ Session.start_time1|date('g:ia') }}.</p>
+
+        <hr />
+
+        <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 21px 0 21px; padding: 0;">{{ message_body }}</p>
+        
+{% endblock %}

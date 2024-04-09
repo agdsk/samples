@@ -1,0 +1,27 @@
+.statistics-table {
+    font-size : 12px;
+    table-layout: fixed;
+
+    th {
+        color            : #fff;
+        background-color : #666;
+        padding          : 5px;
+
+
+        &.id {
+            width: 40px;
+        }
+    }
+
+    td {
+        border     : 1px solid #d8d8d8;
+        text-align : right;
+        min-width  : 20px;
+        padding    : 2px 4px;
+
+    }
+
+    td.statistics-table--left-text {
+        text-align : left;
+    }
+}

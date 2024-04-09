@@ -1,0 +1,4 @@
+<td data-table-header="Course:" class="table--cell__wrap">
+    <a href="{{ path('admin_session_overview', {session_id : Enrollment.Session.id }) }}">{{ Enrollment.Session.Course.name }}</a>&nbsp;<br>
+    {{ Enrollment.Session.date1|date("D") }} {{ Enrollment.Session.date1|date("m/d/y") }} {{ Enrollment.Session.start_time1|date("h:ia") }}
+</td>

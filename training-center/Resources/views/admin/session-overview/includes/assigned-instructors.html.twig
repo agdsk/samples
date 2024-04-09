@@ -1,0 +1,85 @@
+<h2 class="session-overview--header">Assigned Instructors</h2>
+
+{% if InstructorAssignments|length %}
+    <table class="table__fixed">
+        <tr class="table-header-row">
+            <th class="table-cell__small id-column">ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Attendance</th>
+            <th class="table-cell__medium">Action</th>
+        </tr>
+        {% for InstructorAssignment in InstructorAssignments %}
+            <tr data-row-header="{{ InstructorAssignment.User.display_name }}">
+                <td data-table-header="ID:" class="id-column">{{ InstructorAssignment.User.id }}</td>
+                <td data-table-header="Name:">{{ InstructorAssignment.User.display_name }}</td>
+                <td data-table-header="Email:">{{ InstructorAssignment.User.email }}</td>
+
+                {% if not InstructorAssignment.attendance %}
+                    <td data-table-header="Attendance:" class="binary-forms-container">
+                        <form class="ajax-form" method="POST"
+                              action="{{ path('admin_instructor_attendance_pass') }}"
+                              data-inital-action="{{ path('admin_instructor_attendance_pass') }}"
+                              data-undo-action="{{ path('admin_instructor_attendance_undo') }}">
+
+                            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                            <input type="hidden" name="user_id" value="{{ InstructorAssignment.User.id }}"/>
+                            <button type="submit" data-state="active" data-copy="Show" data-sentiment="positive">Show</button>
+                        </form>
+                        <form class="ajax-form" method="POST"
+                              action="{{ path('admin_instructor_attendance_fail') }}"
+                              data-inital-action="{{ path('admin_instructor_attendance_fail') }}"
+                              data-undo-action="{{ path('admin_instructor_attendance_undo') }}">
+
+                            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                            <input type="hidden" name="user_id" value="{{ InstructorAssignment.User.id }}"/>
+                            <button type="submit" data-state="active" data-copy="No Show" data-sentiment="negative">No Show</button>
+                        </form>
+                    </td>
+                {% else %}
+                    <td data-table-header="Attendance:">
+                        <form class="ajax-form" method="POST"
+                              action="{{ path('admin_instructor_attendance_pass') }}"
+                              data-inital-action="{{ path('admin_instructor_attendance_pass') }}"
+                              data-undo-action="{{ path('admin_instructor_attendance_undo') }}">
+
+                            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                            <input type="hidden" name="user_id" value="{{ InstructorAssignment.User.id }}"/>
+
+                            {% if InstructorAssignment.attendance == 'show' %}
+                                <button type="submit" data-state="selected" data-copy="Show" data-sentiment="positive">Show</button>
+                            {% else %}
+                                <button disabled type="submit" data-state="inactive" data-copy="Show" data-sentiment="positive">Show</button>
+                            {% endif %}
+                        </form>
+
+                        <form class="ajax-form" method="POST"
+                              action="{{ path('admin_instructor_attendance_fail') }}"
+                              data-inital-action="{{ path('admin_instructor_attendance_fail') }}"
+                              data-undo-action="{{ path('admin_instructor_attendance_undo') }}">
+
+                            <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                            <input type="hidden" name="user_id" value="{{ InstructorAssignment.User.id }}"/>
+
+                            {% if InstructorAssignment.attendance == 'noshow' %}
+                                <button type="submit" data-state="selected" data-copy="No Show" data-sentiment="negative">No Show</button>
+                            {% else %}
+                                <button disabled type="submit" data-state="inactive" data-copy="No Show" data-sentiment="negative">No Show</button>
+                            {% endif %}
+                        </form>
+                    </td>
+                {% endif %}
+
+                <td data-table-header="Action:">
+                    <form method="POST" action="{{ path('admin_remove_instructor') }}">
+                        <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                        <input type="hidden" name="user_id" value="{{ InstructorAssignment.User.id }}"/>
+                        <button type="submit" style="margin-top: 0;">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p class="muted">No Assigned Instructors.</p>
+{% endif %}

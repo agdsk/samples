@@ -1,0 +1,31 @@
+.clearfix:after {
+    content : "";
+    display : table;
+    clear   : both;
+}
+
+.centered-image {
+    display : block;
+    margin  : 0 auto;
+}
+
+.centered-contents {
+    text-align : center;
+}
+
+.pronounced {
+    color : #1C1E20;
+}
+
+.subtle {
+    color : #777879;
+}
+
+.muted {
+    color : #D2D2D2;
+}
+
+.error {
+    font-size : 12px;
+    color     : #D74E4E;
+}

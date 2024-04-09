@@ -1,0 +1,52 @@
+
+<section class="sidebar" data-signed-in="{{ (app.user) ? 'true' : 'false' }}">
+    <a href="{{ path('home') }}"><h1 class="sidebar--logo">Florida Hospital</h1></a>
+
+    {% if app.user %}
+        <div class="sidebar--welcome">
+            Welcome, {{ app.user.first_name }}
+        </div>
+
+        <ul class="sidebar--menu-list">
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="sidebar--menu-item"><a href="{{ path('site_settings') }}">Site Settings</a></li>
+                <li class="sidebar--menu-item"><a href="{{ path('user-browser') }}">Find a User</a></li>
+                <li class="sidebar--menu-item"><a href="{{ path('upcoming_sessions') }}">Upcoming Sessions</a></li>
+                <li class="sidebar--menu-item" data-notification-count="{{ badges.countPendingRegistrations() }}"><a href="{{ path('pending_registrations') }}">Pending Registrations</a></li>
+                <li class="sidebar--menu-item" data-notification-count="{{ badges.countPendingCancellations() }}"><a href="{{ path('pending_cancellations') }}">Pending Cancellations</a></li>
+                <li class="sidebar--menu-item"><a href="{{ path('management') }}">System Management</a></li>
+            {% endif %}
+
+
+            {% if is_granted('ROLE_INSTRUCTOR') %}
+                <li class="sidebar--menu-item" data-notification-count="{{ badges.countAssignedClasses(app.user.id) }}"><a href="{{ path('assigned_classes') }}">Assigned Classes</a></li>
+            {% endif %}
+
+            <li class="sidebar--menu-item"><a href="{{ path('programs') }}">Find Classes</a></li>
+            <li class="sidebar--menu-item"><a href="{{ path('my_classes') }}">My Classes</a></li>
+            <li class="sidebar--menu-item"><a href="{{ path('my_certifications') }}">My Certifications</a></li>
+            <li class="sidebar--menu-item"><a href="{{ path('my_account') }}">My Account</a></li>
+
+            {% if not is_granted('ROLE_EMPLOYEE') %}
+                <li class="sidebar--menu-item"><a href="{{ path('my_password') }}">My Password</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="sidebar--sign-out">
+            <a class="button--quaternary__small" href="{{ path('logout') }}">Sign out</a>
+        </div>
+    {% else %}
+        <ul class="sidebar--menu-list">
+        </ul>
+        <div class="sidebar--sign-in">
+            <a class="button__small" href="{{ path('login') }}">Sign in / Create Account</a>
+        </div>
+    {% endif %}
+
+    <!-- Bottom Logos -->
+    <div class="sidebar--footer">
+        <span class="screen-reader-text">American Heart Association</span>
+        <span class="screen-reader-text">Authorized Training Center</span>
+    </div>
+
+</section>

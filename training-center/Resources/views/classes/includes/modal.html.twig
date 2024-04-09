@@ -1,0 +1,43 @@
+{# Array of requirements in register modal #}
+{# {% set class_requirements = Program.instruction_prerequisites|split('\n') %}
+ #}{# {% set class_requirements = class_requirements|merge(Course.instruction_prerequisites|split('\n')) %} #}
+
+ {% set class_requirements = Course.bring_to_class_array %}
+
+<div id="modal--overlay--{{Session.id}}" class="modal--overlay" style="display: none;" data-trigger="modal__close" data-modal-to-close="modal--overlay--{{Session.id}}">
+    <div id="modal--window--{{Session.id}}" class="modal--window">
+
+        {# Signed in #}
+        {% if app.user %}
+            <h3 class="modal--title">Student Acknowledgment</h3>
+            <p>Please read and check the following items to acknowledge you will be prepared to take this class.</p>
+            <form class="agree-to-all--form" action="">
+
+                {% for requirement in class_requirements %}
+                    {% if requirement %}
+                        <fieldset class="modal--agree-to-these">
+                            <input type="checkbox" id="course-requirement--{{Session.id}}-{{ loop.index }}" required>
+                            <label for="course-requirement--{{Session.id}}-{{ loop.index }}">{{ requirement|markdown }}</label>
+                        </fieldset>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="modal--button-container">
+                    <button id="modal-continue-button--{{Session.id}}" disabled class="button modal-continue-button" data-path="{{ path('classes', {'course_slug': Course.slug, 'program_slug': Program.slug}) }}" data-path-next="/enroll/" data-class-session-id="{{ Session.id }}">I Meet the Requirments</button>
+                    <a href="/" class="button--quaternary">Return to Home</a>
+                </div>
+            </form>
+
+            {# Not Signed In #}
+        {% else %}
+            <h3 class="modal--title">Please Sign In</h3>
+            <p>You will need to be signed into your account to register for a class</p>
+            <div class="modal--button-container">
+                <a href="{{ path('login') }}" class="button">Sign In</button>
+                    <a href="/" class="button--quaternary">Return to Home</a>
+            </div>
+        {% endif %}
+
+        <a href="#" data-trigger="modal__close" data-modal-to-close="modal--overlay--{{Session.id}}" class="modal--close-trigger"><span class="screen-reader-text" >Close</span></a>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.http-error {
+    color      : #fff;
+    text-align : center;
+    margin-top : 200px;
+    &__code {
+        font-size : 144px;
+    }
+
+    &__description {
+        font-size : 32px;
+    }
+}

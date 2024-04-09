@@ -1,0 +1,85 @@
+{% set page_title = 'My Certifications' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+
+    <div class="header-detail--container">
+        <h1>My Certifications</h1>
+
+        <div class="header-button-set">
+            <a href="/documents/FH-AHA-Duplicate-Card-Request.pdf" target="_blank" class="button">Request new document</a>
+        </div>
+    </div>
+    
+    {% if CurrentCertifications is not empty %}
+        <ul class="card--list">
+            {% for UserCertification in CurrentCertifications %}
+                <li class="card--section" data-card-code="{{ UserCertification.Certification.slug }}">
+                    <div class="card--item">
+                        <div class="card--main">
+                            <div class="card--body">
+                                {% if UserCertification.daysUntilExpired() < 0 %}
+                                    <div class="card--notification card--notification__30">Expired</div>
+                                {% elseif UserCertification.daysUntilExpired() < 30 %}
+                                    <div class="card--notification card--notification__30">&#9888;</div>
+                                    <div class="card--tooltip">Certification expires within 30 days, renew as soon as possible to avoid additional class time.</div>
+                                {% elseif UserCertification.daysUntilExpired() < 60 %}
+                                    <div class="card--notification card--notification__60">&#9888;</div>
+                                    <div class="card--tooltip">Certification expires within 60 days, renew as soon as possible to avoid additional class time.</div>
+                                {% elseif UserCertification.daysUntilExpired() < 90 %}
+                                    <div class="card--notification card--notification__90">&#9888;</div>
+                                    <div class="card--tooltip">Certification expires within 90 days, renew as soon as possible to avoid additional class time.</div>
+                                {% endif %}
+
+                                <h3 class="card--title">{{ UserCertification.Certification.name }}</h3>
+
+                                <h4 class="card--sub-title">Received: {{ UserCertification.issued_at|date('M d, Y') }}</h4>
+                                <h4 class="card--sub-title">Expires: {{ UserCertification.expires_at|date('M d, Y') }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="blank-state">
+            <div class="blank-state__title">You don't have certifications yet.</div>
+
+            <p>Once you complete a course at the FH AHA Training Center, you'll be able to review your awarded certification here.</p>
+        </div>
+    {% endif %}
+
+    {% if ExpiredCertifications is not empty %}
+        <h1>Expired Certifications</h1>
+        <ul class="card--list">
+            {% for UserCertification in ExpiredCertifications %}
+                <li class="card--section" data-card-code="{{ UserCertification.Certification.slug }}">
+                    <div class="card--item">
+                        <div class="card--main">
+                            <div class="card--body">
+                                {% if UserCertification.daysUntilExpired() < 0 %}
+                                    <div class="card--notification card--notification__30">Expired</div>
+                                {% elseif UserCertification.daysUntilExpired() < 30 %}
+                                    <div class="card--notification card--notification__30">&#9888;</div>
+                                    <div class="card--tooltip">Certification expires within 30 days, renew as soon as possible to avoid additional class time.</div>
+                                {% elseif UserCertification.daysUntilExpired() < 60 %}
+                                    <div class="card--notification card--notification__60">&#9888;</div>
+                                    <div class="card--tooltip">Certification expires within 60 days, renew as soon as possible to avoid additional class time.</div>
+                                {% elseif UserCertification.daysUntilExpired() < 90 %}
+                                    <div class="card--notification card--notification__90">&#9888;</div>
+                                    <div class="card--tooltip">Certification expires within 90 days, renew as soon as possible to avoid additional class time.</div>
+                                {% endif %}
+
+                                <h3 class="card--title">{{ UserCertification.Certification.name }}</h3>
+
+                                <h4 class="card--sub-title">Received: {{ UserCertification.issued_at|date('M d, Y') }}</h4>
+                                <h4 class="card--sub-title">Expires: {{ UserCertification.expires_at|date('M d, Y') }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

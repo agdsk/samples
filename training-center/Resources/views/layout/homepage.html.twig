@@ -1,0 +1,15 @@
+{% include 'layout/includes/header.html.twig' %}
+
+<div class="wrapper">
+    {% include 'layout/includes/mobile_toolbar.html.twig' %}
+
+    {% include 'layout/includes/sidebar.html.twig' %}
+
+    <main>
+        {% include 'layout/includes/breadcrumbs.html.twig' %}
+
+        {{ block('body') }}
+    </main>
+</div>
+
+{% include 'layout/includes/footer.html.twig' %}

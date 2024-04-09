@@ -1,0 +1,16 @@
+<td data-table-header="Payment:" class="table--cell__max-width">
+    {% if Enrollment.payment_method == 'card' %}
+        Credit Card: {{ Enrollment.card_number }}<br>
+        TXN: {{ Enrollment.transid }}
+    {% endif %}
+
+    {% if Enrollment.payment_method == 'unit' %}
+        Bill to Unit<br>
+        {{ Enrollment.cost_center }}
+    {% endif %}
+
+    {% if Enrollment.payment_method == 'invoice' %}
+        Invoice<br>
+        Number: {{ Enrollment.Invoice.number }}
+    {% endif %}
+</td>

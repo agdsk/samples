@@ -1,0 +1,87 @@
+{% set page_title = 'Admin - Pending Registrations' %}
+{% extends 'layout/admin.html.twig' %}
+{% set page_class = 'pending-registrations' %}
+
+{% block body %}
+    <h1>Pending Registrations</h1>
+
+    {% if Enrollments is not empty %}
+        <table>
+            <tr>
+                <th class="table-cell__small table-id-column">ID</th>
+                <th>Student</th>
+                <th class="course-column">Course</th>
+                <th>Unit #</th>
+                <th>Unit Cost</th>
+                <th>Student Cost</th>
+                <th>Manager Contact</th>
+                <th>Cert Expiration</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for Enrollment in Enrollments %}
+                <tr data-row-header="{{ Enrollment.User.display_name }}">
+
+                    {# ID #}
+                    <td data-table-header="ID: " class="table-id-column">{{ Enrollment.id }}</td>
+
+                    {# Student #}
+                    <td data-table-header="Student:">
+                        <a href="{{ path('user-browser-show', {'id' : Enrollment.User.id }) }}">{{ Enrollment.User.display_name }}</a><br>
+                        {{ Enrollment.User.email }}
+                    </td>
+
+                    {# Course #}
+                    {% include 'admin/pending-registrations/includes/course-column.html.twig' %}
+
+                    {# Payment #}
+                    <td data-table-header="Unit Cost:">
+                        {{ Enrollment.cost_center }}
+                    </th>
+
+                    {# Cost #}
+                    <td data-table-header="Unit Cost:">
+                        {{ Enrollment.cost }}
+                    </td>
+
+                    {# Secondary Cost #}
+                    <td data-table-header="Student Cost:">
+                        {{ Enrollment.cost2 }}
+                    </td>
+
+                    {# Manager Contact #}
+                    <td data-table-header="Manager Contact:">
+                        {{ Enrollment.manager_name }}
+                        <br />
+                        {{ Enrollment.manager_contact }}
+                    </td>
+
+                    {# Certification Expiration #}
+                    <td data-table-header="Cert Expiration:">
+                        {% set newest_certification = null %}
+                        {% for UserCertification in Enrollment.User.UserCertifications %}
+                            {% if Enrollment.Session.Course.certification_received_id == UserCertification.certification_id %}
+                                {% if newest_certification == null %}
+                                    {% set newest_certification = UserCertification %}
+                                {% endif %}
+
+                                {% if UserCertification.expires_at > newest_certification.expires_at %}
+                                    {% set newest_certification = UserCertification %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {{ newest_certification.expires_at|default("n/a") }}
+                    </td>
+
+                    {# Actions #}
+                    {% include 'admin/pending-registrations/includes/actions-column.html.twig' %}
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        <p>No Pending Registrations</p>
+    {% endif %}
+
+{% endblock %}

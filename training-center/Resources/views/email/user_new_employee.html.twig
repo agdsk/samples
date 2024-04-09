@@ -1,0 +1,13 @@
+{% extends 'layout/email.html.twig' %}
+
+{% block title %}Welcome to your FHTC Account, <name>{% endblock %}
+
+{% block body %}
+  <h1 style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 200; margin: 40px 0 14px; padding: 0;">Welcome to your FHTC Account, {{ User.first_name }}</h1>
+        <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 40px; padding: 0;">Welcome to your FHTC account. Sign up for classes, keep your certifications up-to-date, and instruct courses. Log in to your account to explore your courses and certifications.</p>
+        
+    {% include 'email/includes/button.html.twig' 
+      with {'text' : 'Get Started', 
+          'link' : absolute_url(path('login', { 'token': User.token }))} %}
+        
+{% endblock %}

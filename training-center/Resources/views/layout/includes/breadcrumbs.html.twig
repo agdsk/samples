@@ -1,0 +1,28 @@
+{% if breadcrumbs is defined %}
+    <header>
+        <div class="bread-crumbs">
+            <a href="{{ path('home') }}" class="bread-crumbs--home"><span class="screen-reader-text">Home</span></a>
+
+            {% for text, link in breadcrumbs %}
+                {% if not loop.last %}
+                    <a href="{{ link }}" class="bread-crumbs--bread-crumb">{{ text }}</a>
+                {% else %}
+                    <span class="bread-crumbs--bread-crumb">{{ text }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="bread-crumb--back">
+            {% if breadcrumbs|length >= 2 %}
+                {% for text, link in breadcrumbs[-2:1] %}
+                
+                    <a class="button__small" href="{{ link }}">&#10094;&nbsp;{{ text }}</a>
+
+                {% endfor %}
+            {% else %}
+                <a class="button__small" href="/">&#10094;&nbsp;Home</a>
+            {% endif %}
+        </div>
+
+    </header>
+{% endif %}

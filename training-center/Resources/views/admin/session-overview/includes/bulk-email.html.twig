@@ -1,0 +1,12 @@
+<div class="form--container">
+    <h2 class="form--header">Send Email</h2>
+
+    <p class="form--copy">Send an email to all the students and instructors in the class</p>
+
+    <form method="POST" action="{{ path('admin_session_email') }}">
+        <label class="hidden-element">Message</label>
+        <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+        <textarea name="message"></textarea><br/>
+        <button type="submit">Send Email</button>
+    </form>
+</div>

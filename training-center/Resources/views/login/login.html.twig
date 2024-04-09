@@ -1,0 +1,14 @@
+{% set page_title = 'Login' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <section class="boxy-form">
+        <h1>Login</h1>
+
+        <p><strong>Florida Hospital Employees</strong><br>Log in using your OpID and password.</p>
+
+        <p><strong>Non-Employees</strong><br>Log in using your your email address and password. If you don't have an account, <a href="{{ path('signup') }}" tabindex="-1">signup here</a>. If you have forgotten your password you can <a href="{{ path('forgot') }}">reset your password here</a>.</p>
+
+        {{ form(form) }}
+    </section>
+{% endblock %}

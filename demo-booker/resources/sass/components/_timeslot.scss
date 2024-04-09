@@ -1,0 +1,102 @@
+.timeslot {
+    background    : #FFFFFF;
+    border        : 1px solid #777879;
+    border-radius : 3px;
+    margin-bottom : 16px;
+
+    &__time {
+        font-family : AcmeSans-Medium;
+        font-size   : 16px;
+        color       : #1C1E20;
+        line-height : 18px;
+        text-align  : center;
+        padding     : 19px;
+        position    : relative;
+        cursor      : pointer;
+
+        &__dots {
+            position : absolute;
+            right    : 32px;
+            top      : 32px;
+        }
+    }
+
+    &__reservation {
+        font-family : AcmeSans-Medium;
+        border-top  : 1px solid #F0F0F0;
+        display     : none;
+        overflow    : auto;
+        zoom        : 1;
+        font-size   : 16px;
+        color       : #1C1E20;
+        line-height : 56px;
+        padding: 10px;
+
+        &--complete {
+            .timeslot__reservation__cancel-initiate-button {
+                visibility : hidden;
+            }
+
+            .timeslot__reservation__checkin-commit-button {
+                border        : 2px solid #D2D2D2;
+                border-radius : 25px;
+                color         : transparent;
+                background    : #F0F0F0 url('/images/checkmark-grey.png') no-repeat center;
+            }
+
+            .timeslot__reservation__demo-commit-button {
+                border        : 2px solid #D2D2D2;
+                border-radius : 25px;
+                color         : transparent;
+                background    : #F0F0F0 url('/images/checkmark-grey.png') no-repeat center;
+            }
+
+            .timeslot__reservation__script-initiate-button {
+                display : none;
+            }
+        }
+
+        &--checked_in {
+            .timeslot__reservation__checkin-commit-button {
+                border        : 2px solid #D2D2D2;
+                border-radius : 25px;
+                color         : transparent;
+                background    : #F0F0F0 url('/images/checkmark-grey.png') no-repeat center;
+            }
+        }
+
+        &__cancel-initiate-button, &__add-initiate-button {
+            float      : left;
+            text-align : center;
+            cursor     : pointer;
+            width      : 70px;
+        }
+
+        &__guest {
+            float : left;
+
+            a {
+                color   : #1574D4;
+                display : block;
+
+                img {
+                    margin-right : 30px;
+                }
+            }
+        }
+
+        &__buttons {
+            width   : 330px;
+            float   : right;
+            padding : 4px;
+
+            .button--helpful {
+                width : 100%;
+
+                &:first-child {
+                    margin-right : 0;
+                }
+            }
+        }
+    }
+}

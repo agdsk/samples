@@ -1,0 +1,45 @@
+{% extends 'layout/homepage.html.twig' %}
+
+{% block body %}
+    <div class="hero">
+        <div class="hero--content">
+            <h1 class="hero--header">Florida Hospital Training Center</h1>
+
+            <div class="hero--cta-container">
+                <a href="{{ path('programs') }}" class="button__large">Find a Course</a>
+
+                {% if not app.User %}
+                    <a href="{{ path('login') }}" class="button--quaternary__large">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container home-content">
+        {% if notice %}
+            {{ notice|markdown }}
+        {% endif %}
+
+        <p>The Florida Hospital Training Center is an authorized provider of the American Heart Association, the American Academy of Pediatrics and the Emergency Nurse Association certification courses.</p>
+
+        <p>Resuscitation certification courses are open to both Florida Hospital employees and the community.</p>
+
+        <hr>
+
+        <p><strong>The Florida Hospital Training Center is located at:</strong><br/>
+            201 Park Place, Suite 321<br/>
+            Altamonte Springs, FL 32701<br/>
+            Phone: 407-303-5288<br/>
+            Fax: 407-303-5289<br/>
+            Email: FH_AHA@flhosp.org</p>
+
+        <p><strong>Hours of operation:</strong><br/>
+            Monday &ndash; Thursday: 8:00 am &ndash; 4:00 pm<br/>
+            Friday: 8:00 am &ndash; 2:00 pm</p>
+
+        <hr>
+
+        <h3>AHA Disclaimer</h3>
+        <p>The American Heart Association strongly promotes knowledge and proficiency in BLS, ACLS and PALS and has developed instructional materials for this purpose. Use of these materials in an educational course does not represent course sponsorship by the AHA. Any fees charged for such a course, except for a portion of fees needed for AHA materials, do not represent income to the Association.</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% set page_title = 'Admin - Pending Cancellations' %}
+{% extends 'layout/admin.html.twig' %}
+
+
+{% block body %}
+    <h1>Pending Cancellations</h1>
+
+    {% if Enrollments is not empty %}
+        <table>
+            <tr>
+                <th class="table-cell__small table-id-column">ID</th>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Reason</th>
+                <th>Payment</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for Enrollment in Enrollments %}
+                <tr data-row-header="{{ Enrollment.User.display_name }}">
+
+                    {# ID #}
+                    <td data-table-header="ID: " class="table-id-column">{{ Enrollment.id }}</td>
+
+                    {# Student #}
+                    <td data-table-header="Student:">
+                        <a href="{{ path('user-browser-show', {'id' : Enrollment.User.id }) }}">{{ Enrollment.User.display_name }}</a><br>
+                        {{ Enrollment.User.email }}
+                    </td>
+
+                    {# Course #}
+                    {% include 'admin/pending-cancellations/includes/course-column.html.twig' %}
+
+                    <td data-table-header="Reason:">
+                        {{ Enrollment.cancellation_reason_friendly }}
+                    </td>
+
+                    {# Payment #}
+                    {% include 'admin/pending-cancellations/includes/payment-column.html.twig' %}
+
+                    {# Cost #}
+                    <td data-table-header="Cost:">
+                        {{ Enrollment.cost }}
+                    </td>
+
+                    {# Action #}
+                    {% include 'admin/pending-cancellations/includes/action-column.html.twig' %}
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        <p>No Pending Cancellations</p>
+    {% endif %}
+{% endblock %}

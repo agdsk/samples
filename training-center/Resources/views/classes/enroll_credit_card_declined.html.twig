@@ -1,0 +1,16 @@
+{% set page_title = 'Billing' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <div class="form--container">
+        <h3 class="form--header">Your payment was declined</h3>
+
+        <p>We're sorry, your credit card payment was declined.</p>
+
+        {% if declinereason != '' %}
+            <p>The following error message from the card processor was returned: <b>{{ declinereason }}</b></p>
+        {% endif %}
+
+        <p><a href="{{ path('enroll_with_credit_card', {'course_slug': Course.slug, 'program_slug': Program.slug, 'session_id': Session.id}) }}">Try again</a></p>
+    </div>
+{% endblock %}

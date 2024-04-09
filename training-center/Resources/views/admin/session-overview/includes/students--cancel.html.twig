@@ -1,0 +1,31 @@
+{% if not Enrollment.cancellation_reason %}
+    <td data-table-header="Cancel:">
+        <script type="text/template" class="cancel-modal-template">
+            <div id="modal--overlay__cancel" class="modal--overlay">
+                <div id="modal--window__cancel" class="modal--window cancel-modal">
+                    <h3 class="modal--title">Cancel Student</h3>
+
+                    <form method="POST" action="{{ path('admin_student_cancel') }}">
+                        <input type="hidden" name="session_id" value="{{ Session.id }}"/>
+                        <input type="hidden" name="user_id" value="{{ Enrollment.User.id }}"/>
+                        {% for key,CancellationReason in cancellation_reasons %}
+                            <fieldset class="cancel-modal--options">
+                                <input id="cancel-reason--{{ Enrollment.User.id }}--{{ key }}" type="radio" name="cancellation_reason" value="{{ key }}"/>
+                                <label for="cancel-reason--{{ Enrollment.User.id }}--{{ key }}">{{ CancellationReason }}</label>
+                            </fieldset>
+                        {% endfor %}
+                        <div class="modal--button-container">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                    <a href="#" data-trigger="modal--cancel__close" class="modal--close-trigger"><span class="screen-reader-text">Close</span></a>
+                </div>
+            </div>
+        </script>
+        <button class="cancel-button">Cancel</button>
+    </td>
+{% else %}
+    <td data-table-header="Cancel:">
+        {{ cancellation_reasons[Enrollment.cancellation_reason] }}
+    </td>
+{% endif %}

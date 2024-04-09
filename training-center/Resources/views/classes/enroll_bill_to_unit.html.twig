@@ -1,0 +1,12 @@
+{% set page_title = 'Billing' %}
+{% extends 'layout/standard.html.twig' %}
+
+{% block body %}
+    <div class="form--container">
+        <h3 class="form--header">Billing</h3>
+
+        {{ form(form) }}
+
+        <p><a href="{{ path('enroll_with_credit_card', {'course_slug': Course.slug, 'program_slug': Program.slug, 'session_id': app.request.get('session_id')}) }}">Pay by Credit Card</a></p>
+    </div>
+{% endblock %}

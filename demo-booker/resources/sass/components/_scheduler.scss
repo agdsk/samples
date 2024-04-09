@@ -1,0 +1,156 @@
+.scheduler {
+    position: relative;
+    clear: both;
+    padding: 32px;
+
+    .form-input,
+    select {
+        padding: 5px;
+        height: auto;
+        min-width: 90px;
+        margin-bottom: 0;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    select {
+        padding: 0;
+    }
+
+    .scheduler__schedule-settings {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        input[type="date"] {
+            max-width: 150px;
+        }
+
+        input[type="number"] {
+            max-width: 50px;
+            min-width: 30px;
+            float: right;
+        }
+
+        > div {
+            margin-right: 12px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+            &:nth-child(2) {
+                margin-right: auto;
+
+            }
+            &:nth-child(3) {
+                text-align: right;
+                margin-left: auto;
+            }
+
+            > span {
+                display: block;
+            }
+        }
+
+        input {
+            width: 100%;
+        }
+    }
+
+    .demo-total {
+        display: block;
+        width: 100%;
+        height: auto;
+        line-height: 1;
+        text-align: center;
+    }
+}
+
+.scheduler__title {
+    margin-bottom: 32px;
+}
+
+.scheduler__add-schedule {
+    display: block;
+    max-width: 220px;
+    margin: 0 auto;
+}
+
+.scheduler__schedule {
+    padding: 0 0 32px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #d2d2d2;
+
+    &.intend-delete {
+        opacity: 0.5;
+    }
+
+    .delete-message {
+        display: block;
+        float: right;
+        color: red;
+        font-size: 14px;
+        text-align: right;
+        font-family: 'AcmeSans-Light', sans-serif;
+
+        a {
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    .delete-schedule {
+        display: block;
+        float: right;
+        font-family: 'AcmeSans-Light', sans-serif;
+        font-size: 14px;
+        color: #1C1E20;
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
+.scheduler__day {
+    padding: 0 10px;
+    border-right: 1px dashed #d2d2d2;
+
+    &:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .table-narrow__label-cell {
+        width: 90px;
+    }
+
+    select {
+        margin-bottom: 8px;
+        width: 100%;
+    }
+}
+
+.scheduler__schedule-hours {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px 0;
+
+    .scheduler__day > span {
+        display: block;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+}
+
+.scheduler__schedule-label-column {
+    min-width: 100px;
+    padding: 47px 5px 0;
+    border-right: 1px dashed #d2d2d2;
+    > span {
+        display: block;
+        margin-bottom: 8px;
+        line-height: 24px;
+    }
+}

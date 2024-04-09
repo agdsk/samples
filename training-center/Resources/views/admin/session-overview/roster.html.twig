@@ -1,0 +1,62 @@
+{% extends 'layout/print.html.twig' %}
+
+{% block title %}Class Roster{% endblock %}
+
+{% block body %}
+    <h1 align="center">Class Roster - {{ Session.Course.name }}</h1>
+
+    <p class="titleSmall">{{ Session.date1|date('M d') }}, {{ Session.start_time1|date('g:ia') }} &ndash; {{ Session.end_time1|date('g:ia') }}</p>
+
+    {% if Session.start_time2 %}
+        <p class="titleSmall">{{ Session.date2|date('M d') }}, {{ Session.start_time2|date('g:ia') }} &ndash; {{ Session.end_time2|date('g:ia') }}</p>
+    {% endif %}
+
+    <table class="roster printable-table">
+        <thead>
+        <tr>
+            <th>Student Info</th>
+            <th>OpID/Emp ID</th>
+            <th>Department</th>
+            <th>Title</th>
+            <th>Pro License/Cert #</th>
+            <th class="roster--attendance-title">Attendance</th>
+            <th class="roster--grade-title">Passed</th>
+        </tr>
+        </thead>
+        {% for Enrollment in Session.Enrollments %}
+            <tr>
+                <td>
+                    {{ Enrollment.User.display_name|default('-') }}
+                    <br />
+                    {{ Enrollment.User.email|default('-') }}
+                    <br />
+                    {{ Enrollment.User.phone|default('-') }}
+                </td>
+                <td class="roster--opid">{{ Enrollment.User.opid|default('-') ~ '/' ~ Enrollment.User.employee_id|default('-') }}</td>
+                <td class="roster--department">{{ Enrollment.User.department }}</td>
+                <td class="roster--title">{{ Enrollment.User.title }}</td>
+                <td class="roster--cert"></td>
+                <td class="roster--attendance">
+                    <div class="roster--attendance-box">
+                        {% if Enrollment.attendance == 'show' %}
+                            <img class="roster--grade-pass" src="/images/vector/form--check.svg"/>
+                        {% endif %}
+                        {% if Enrollment.attendance == 'noshow' %}
+                            <img class="roster--grade-fail" src="/images/vector/form--x-dark.svg"/>
+                        {% endif %}
+                    </div>
+                </td></div>
+                <td class="roster--grade">
+                    <div class="roster--grade-box">
+                        {% if Enrollment.grade == 'pass' %}
+                            <img class="roster--grade-pass" src="/images/vector/form--check.svg"/>
+                        {% endif %}
+                        {% if Enrollment.grade == 'fail' %}
+                            <img class="roster--grade-fail" src="/images/vector/form--x-dark.svg"/>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

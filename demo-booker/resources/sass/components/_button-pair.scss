@@ -1,0 +1,15 @@
+.button-pair {
+    @extend .clearfix;
+
+    button {
+        width : 48%;
+    }
+
+    button:nth-child(1) {
+        float : left;
+    }
+
+    button:nth-child(2) {
+        float : right;
+    }
+}

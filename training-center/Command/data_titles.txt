@@ -1,0 +1,233 @@
+Activities Therapist
+Activity/Recreation Assistant
+Acupuncturist
+Anesthesia Director
+Anesthesia Technician
+Audiologist
+Audiology Technician
+Behavioral Health Director
+Behavioral Health Manager
+Behavioral Health Supervisor
+Behavioral Health Technician
+Behavioral Health Therapist
+Cardiac Catherization Technologist
+Cardiac Catheterization Laboratory Director
+Cardiac Catheterization Technician
+Cardiac Rehab Director (RN)
+Cardiac Services Director
+Cardiac Services Manager
+Cardiac Services Supervisor
+Chemical Dependency Counselor
+Clinical Coordinator
+Clinical Educator
+Clinical Practice/Education Director
+Clinical Practice Supervisor
+Clinic Operations Director
+Clinic Practice Manager
+CT Technologist
+Cytotechnologist
+Dental Assistant - Registered
+Dental Hygienist
+Dentist
+Discharge Coordinator
+Dosimetrist - Certified
+EEG Technician
+EEG Technician - Registered (Neurophysiology Tech)
+EKG Technician
+Embryologist
+Emergency Room Physician - Employed
+Emergency Room Technician *New for 2016*
+EMS Director
+EMT (Emergency Medical Technician)
+Epidemiologist
+Exercise Physiologist
+Exercise Specialist
+Film Librarian
+Genetic Counselor *New for 2016*
+GI Technician
+Hemodialysis Technician - Certified
+Histotechnician
+Histotechnologist
+Home Care Director (RN)
+Home Care Manager
+Home Care Supervisor
+Home Health Aide
+Home Health Liaison - RN
+Home Services Director
+Hospitalist
+Hospitalist - Nurse Practitioner
+Hyperbaric Technician
+Laboratory Director
+Laboratory Manager
+Laboratory Supervisor
+Licensed Clinical Social Worker (LCSW)
+Long-Term Care Director (RN)
+Long-Term Care Facilities Director (RN)
+Long-Term Care Manager
+Long-Term Care Supervisor
+Magnetic Resonance Imaging (MRI) Technologist
+Mammography Technologist
+Medical Director
+Medical Laboratory Technician
+Medical Physicist
+Medical Technologist - ASCP
+Minimum Data Set (MDS) Coordinator (LPN)
+Minimum Data Set (MDS) Coordinator (RN)
+Monitor Technician
+Neurodiagnostic Supervisor
+Neurodiagnostic Technologist
+Nuclear Medicine Technologist
+Nutrition Technician
+Obstetrics Director
+Occupational Therapist
+Occupational Therapy Assistant - Certified (COTA)
+Oncology Services Director
+Operating Room Assistant
+Ophthalmic Assistant - Certified
+Optician
+Optometrist
+Optometry Technician
+Outpatient Services Director
+PACS Coordinator
+PACS System Administrator
+Paramedic
+Perfusionist
+PET Technologist
+Phlebotomist/Lab Assistant
+Physical Therapist
+Physical Therapy Assistant (PTA) - Certified
+Physical Therapy Director
+Physician Assistant
+Physician Assistant - Cardiology
+Physician Assistant - Emergency & Trauma
+Physician Assistant - Orthopedics
+Physician Assistant - Primary Care
+Physician Assistant - Surgery/OR
+Physician Services Director
+Physician Services Manager
+Polysomnographic Technician
+Polysomnographic Technician - Registered
+Psychiatrist
+Psychologist
+Radiation Therapist
+Radiologic Equipment Technician/Specialist
+Radiology Director
+Radiology Manager
+Radiology Supervisor
+Radiology Technologist - Certified
+Radiology Technologist - Non-Certified
+Radiology Technology Assistant
+Recreation Therapist
+Rehabilitation Services Director
+Rehabilitation Services Manager
+Rehabilitation Therapy/Physical Therapy Aide
+Rehab Services Supervisor
+Residential Services Assistant *New for 2016*
+Respiratory Care Director
+Respiratory Care Manager
+Respiratory Therapist - Certified
+Respiratory Therapist - Registered
+Respiratory Therapy Technician - Certified
+Scheduler - Cancer Center
+Sonographer/Ultrasound Technologist (ARDMS)
+Sonographer Cardiac/Echo Technician (RDMS)
+Sonographer Vascular Technologist (RVT)
+Special Procedures Technologist (ARRT)
+Speech Pathologist
+Surgery Scheduler
+Surgical (OR) Services Director (RN)
+Surgical Assistant (RNSA)
+Surgical Technician - Certified
+Surgical Technician - Non-Certified
+Admissions RN
+Cardiac Catheterization Nurse (RN)
+Case Management Director (RN)
+Case Manager (LPN)
+Case Manager (RN)
+Case Manager (RN)/Utilization
+Review Coordinator
+Case Worker
+Certified Medication Technician (CMT)
+Charge Nurse (LPN)
+Charge Nurse (RN)
+Clinical Nurse Supervisor (RN)
+Clinician
+Clinic RN
+Diabetes Educator (RN)
+Emergency Room Director (RN)
+House (Shift) Supervisor (RN)
+Infection Control Specialist (RN)
+Infusion Nurse Coordinator - RN
+Intensive Care Unit Nurse
+Lactation Consultant (RN)
+LPN - I.V. Certified
+LPN - Non-I.V. Certified
+LPN Supervisor
+Medical Assistant
+Medical Assistant - Certified
+Medical Assistants Manager *New for 2016*
+Nurse - Staff (RN)
+Nurse - Staff (RN) - Acute Care
+Nurse - Staff (RN) - Advice/Telephone
+Nurse - Staff (RN) - Emergency Room
+Nurse - Staff (RN) - ICU/Intensive Care
+Nurse - Staff (RN) - IVF
+Nurse - Staff (RN) - Obstetrics, Labor & Delivery *New for 2016*
+Nurse - Staff (RN) - Renal Dialysis
+Nurse - Staff (RN) - Surgical
+Nurse Anesthetist Certified Registered (CRNA)
+Nurse Assistant - Certified (CNA)
+Nurse Assistant - Certified (CNA) Acute Care
+Nurse Instructor (RN)
+Nurse Manager - Acute Care
+Nurse Manager - Emergency & Trauma
+Nurse Manager - Obstetrical *New for 2016*
+Nurse Manager - Surgical
+Nurse Manager/Head Nurse (RN)
+Nurse Midwife - Certified
+Nurse Navigator (RN)
+Nurse Practitioner (RN)
+Nurse Practitioner - Acute Care
+Nurse Practitioner - Ambulatory Care
+Nurse Practitioner - Cardiac
+Nurse Practitioner - Emergency & Trauma
+Nurse Practitioner - ICU/Intensive Care
+Nurse Practitioner - Infection Control
+Nurse Practitioner - Neonatal (RN)
+Nurse Practitioner - Neurosurgical
+Nurse Practitioner - Oncology
+Nurse Practitioner - Orthopedic
+Nurse Practitioner - Pediatric
+Nurse Practitioner - Psychiatric
+Nurse Practitioner - Surgical
+Nurse Practitioner - Urgent Care
+Nurse Practitioner - Women's Health *New for 2016*
+Nurse Specialist - Clinical (RN)
+Nursing Director - Cardiac
+Nursing Director - Case Management
+Nursing Director - Critical Care
+Nursing Director - Emergency & Trauma
+Nursing Director - Obstetrical
+Nursing Director - Oncology
+Nursing Director - Psychiatric
+Nursing Director - Surgical
+Nursing Services Director (RN)
+Obstetrics (Labor & Delivery) Technician
+Occupational Health Nurse (RN)
+Oncology Nurse
+Patient Care Associate
+Patient Care Manager
+Patient Care Technician
+Quality Coordinator (RN)
+Research Nurse
+Unit Secretary
+Wound Care Nurse
+Pharmacist - Clinical
+Pharmacist - Retail
+Pharmacist - Staff
+Pharmacy Director
+Pharmacy Informatics Specialist RPh
+Pharmacy Manager
+Pharmacy Purchasing Agent
+Pharmacy Supervisor
+Pharmacy Technician - Certified

@@ -1,0 +1,14 @@
+{% extends 'layout/email.html.twig' %}
+
+{% block title %}Your Course Begins at {{ Session.start_time1|date('g:i A') }}{% endblock %}
+
+{% block body %}
+  <h1 style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 200; margin: 40px 0 14px; padding: 0;">Your Course Begins at {{ Session.start_time1|date('g:i A') }}</h1>
+
+        <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 40px; padding: 0;">Your assigned course {{ Session.Course.name }} begins today at {{ Session.start_time1|date('g:i A') }}. Log in to your FHTC account to view course requirements, materials and location.</p>
+        
+    {% include 'email/includes/button.html.twig' 
+      with {'text' : 'Get Started', 
+          'link' : absolute_url(path('login'))} %}
+        
+{% endblock %}

@@ -1,0 +1,32 @@
+{% set page_title = 'Admin - System Management - ' ~ name_plural %}
+{% extends 'layout/admin.html.twig' %}
+
+{% block body %}
+    <h1>Manage {{ name_plural }}</h1>
+
+    <a href="create/">New {{ name_singular }}</a></td>
+
+    <table>
+        <tr>
+            {% for columnName, columnDefinition in columns %}
+                <th>{{ columnName }}</th>
+            {% endfor %}
+            <th>Edit</th>
+            {% if deletable|default(false) %}
+            <th>Delete</th>
+            {% endif %}
+        </tr>
+        {% for Record in Records %}
+            <tr>
+
+                {% for columnName, columnDefinition in columns %}
+                    <td>{{ managementCellRenderer(columnName, columnDefinition, Record)|raw }}</td>
+                {% endfor %}
+                <td><a href="edit/{{ Record.id }}">Edit</a></td>
+                {% if deletable|default(false) %}
+                <td><form method="POST" action="delete/{{ Record.id }}"><button type="submit">Delete</button></form></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,38 @@
+<h2 class="session-overview--header">Students</h2>
+<table>
+
+    <tr class="table-header-row">
+        <th class="table-cell__small id-column">ID</th>
+        <th>Name</th>
+        <th>Unit/Student Cost</th>
+        <th>Grade</th>
+        <th>Attendance</th>
+        <th>Cancel</th>
+        <th>Book ID</th>
+    </tr>
+
+    {% for Enrollment in Enrollments %}
+        {% set enrollment_class = "enrollment__#{Enrollment.status}" %}
+
+        <tr class="{{ enrollment_class }}" data-row-header="{{ Enrollment.User.last_name }}, {{ Enrollment.User.first_name }}">
+
+            <td data-table-header="ID:" class="id-column">{{ Enrollment.User.id }}</td>
+            <td data-table-header="Name:" class="table--cell__wrap">{{ Enrollment.User.last_name }}, {{ Enrollment.User.first_name }}</td>
+            <td data-table-header="Unit/Student Cost:" class="table--cell__wrap">${{ Enrollment.cost }}/${{ Enrollment.cost2 }}</td>
+
+            {# Grade #}
+            {% include 'admin/session-overview/includes/students--grade.html.twig' %}
+
+            {# Attendance #}
+            {% include 'admin/session-overview/includes/students--attendance.html.twig' %}
+
+            {# Cancel #}
+            {% include 'admin/session-overview/includes/students--cancel.html.twig' %}
+
+            {# Book ID #}
+            {% include 'admin/session-overview/includes/students--book-id.html.twig' %}
+
+        </tr>
+
+    {% endfor %}
+</table>
