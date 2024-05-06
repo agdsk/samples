@@ -42,3 +42,10 @@ and password and pay for courses by credit card.
 
 A simple landing page rendering of a Photoshop document provided by a designer, showcasing HTML and CSS
 
+### Other Samples
+
+- [Real Estate Property Data Map](https://oucpowersgrowth.com/map/)
+  - Google Maps and Angular application showcasing commercial real estate opportunities created for the City of
+    Orlando's Economic Development Department
+  
+
