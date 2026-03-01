@@ -1,3 +1,9 @@
+### [Dot-AIassistant](https://github.com/agdsk/samples/tree/main/dot-aiassistant)
+
+**Markdown**
+
+.aiassistant project rules for AI agents
+
 ### [Demo-Booker](https://github.com/agdsk/samples/tree/main/demo-booker)
 
 **Laravel / PHP 5**
