@@ -1,3 +1,9 @@
+### [Debugger](https://github.com/agdsk/samples/tree/main/debugger)
+
+**CodeIgniter / PHP 5**
+
+Listens to debug() messages in production code using Redis pub/sub
+
 ### [Dot-AIassistant](https://github.com/agdsk/samples/tree/main/dot-aiassistant)
 
 **Markdown**
@@ -15,6 +21,12 @@ Appointment booking application for Oculus Rift product demonstrations.
 **CodeIgniter / PHP 5**
 
 Generates customer marketing mailing lists from automotive sales data.
+
+### [Task-Runer](https://github.com/agdsk/samples/tree/main/task-runner)
+
+**CodeIgniter / PHP 5**
+
+Background task runner using Redis and sample task
 
 ### [Training-Center](https://github.com/agdsk/samples/tree/main/training-center)
 
