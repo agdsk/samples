@@ -1,12 +1,12 @@
 <?php
 
-use updash\exceptions\DateTimeException;
-use updash\exceptions\DirectoryNotCreatedException;
-use updash\exceptions\FileNotWritableException;
-use updash\services\Profiler;
-use updash\traits\Debugger;
-use updash\traits\Multithreading;
-use updash\traits\UsesModels;
+use application\exceptions\DateTimeException;
+use application\exceptions\DirectoryNotCreatedException;
+use application\exceptions\FileNotWritableException;
+use application\services\Profiler;
+use application\traits\Debugger;
+use application\traits\Multithreading;
+use application\traits\UsesModels;
 
 /**
  * Parent class for all tasks.
@@ -100,7 +100,7 @@ abstract class TaskAbstract
         $this->rateTimestamps = new SplQueue();
 
         $this->redis = new Redis();
-        $this->redis->connect(\updash\types\Task\REDIS_HOST, \updash\types\Task\REDIS_PORT);
+        $this->redis->connect(\application\types\Task\REDIS_HOST, \application\types\Task\REDIS_PORT);
     }
 
     /**
@@ -144,7 +144,7 @@ abstract class TaskAbstract
             $this->debug('Error initializing log: ' . $e->getMessage());
         }
 
-        if (!\updash\types\Task\isCommandLineInterface()) {
+        if (!\application\types\Task\isCommandLineInterface()) {
             throw new RuntimeException('This must be run from the command line');
         }
 
@@ -203,7 +203,7 @@ abstract class TaskAbstract
             $this->counter . '/' . $this->total,
             $this->statPercentComplete() . '%',
             $this->statRate() . '/s',
-            \updash\types\Task\formatBytesToHuman($this->statMemory()),
+            \application\types\Task\formatBytesToHuman($this->statMemory()),
             $this->statTimeLoopElapsedFormatted(),
             $this->statTimeRemainingFormatted(),
         ];
@@ -230,7 +230,7 @@ abstract class TaskAbstract
      */
     protected function getTaskNextRunTime()
     {
-        return \updash\types\Task\redis()->hGet($this->keyTask(), 'NextRun');
+        return \application\types\Task\redis()->hGet($this->keyTask(), 'NextRun');
     }
 
     /**
@@ -302,7 +302,7 @@ abstract class TaskAbstract
         $this->current = '';
 
         // Store in Redis immediately
-        \updash\types\Task\redis()->hSet($this->keyTask(), 'Status', '');
+        \application\types\Task\redis()->hSet($this->keyTask(), 'Status', '');
     }
 
     /**
@@ -325,7 +325,7 @@ abstract class TaskAbstract
         $this->current = $operation;
 
         // Store in Redis immediately
-        \updash\types\Task\redis()->hSet($this->keyTask(), 'Status', $operation);
+        \application\types\Task\redis()->hSet($this->keyTask(), 'Status', $operation);
 
         // Debug
         $this->debug('Currently: ' . $operation);
@@ -340,7 +340,7 @@ abstract class TaskAbstract
      */
     protected function setNextRun($schedule)
     {
-        $DateTime = \updash\types\Task\datetimeParse($schedule);
+        $DateTime = \application\types\Task\datetimeParse($schedule);
 
         $this->update([
             'NextRun' => $DateTime->getTimestamp(),
@@ -371,14 +371,14 @@ abstract class TaskAbstract
      */
     protected function stopIfBrakeEngaged()
     {
-        $brake = \updash\types\Task\redis()->hGet($this->keyTask(), 'Brake') == 1;
+        $brake = \application\types\Task\redis()->hGet($this->keyTask(), 'Brake') == 1;
 
         if ($brake == 1) {
             $this->debug('Brake engaged');
 
             // Update the task state to Halted
-            \updash\types\Task\redis()->hSet($this->keyTask(), 'State', 'Halted');
-            \updash\types\Task\redis()->hSet($this->keyTask(), 'Brake', 0);
+            \application\types\Task\redis()->hSet($this->keyTask(), 'State', 'Halted');
+            \application\types\Task\redis()->hSet($this->keyTask(), 'Brake', 0);
 
             exit;
         }
@@ -395,7 +395,7 @@ abstract class TaskAbstract
             $this->debug('Taking a nap');
 
             // Update the task state to Halted
-            \updash\types\Task\redis()->hSet($this->keyTask(), 'State', 'Napping');
+            \application\types\Task\redis()->hSet($this->keyTask(), 'State', 'Napping');
 
             exit;
         }
@@ -489,7 +489,7 @@ abstract class TaskAbstract
      */
     private function isTaskEnabled()
     {
-        return \updash\types\Task\redis()->hGet($this->keyTask(), 'Enabled') == 1;
+        return \application\types\Task\redis()->hGet($this->keyTask(), 'Enabled') == 1;
     }
 
     /**
@@ -499,7 +499,7 @@ abstract class TaskAbstract
      */
     private function isTaskInstalled()
     {
-        return \updash\types\Task\redis()->sismember($this->keyTasks(), $this->getTaskName());
+        return \application\types\Task\redis()->sismember($this->keyTasks(), $this->getTaskName());
     }
 
     /**
@@ -531,7 +531,7 @@ abstract class TaskAbstract
      */
     private function logInitialize()
     {
-        $this->log = \updash\types\Task\path_to_logs('tasks/' . $this->getTaskName() . '.log');
+        $this->log = \application\types\Task\path_to_logs('tasks/' . $this->getTaskName() . '.log');
 
         // Ensure the log directory is writable
         $logDirectory = dirname($this->log);
@@ -623,7 +623,7 @@ abstract class TaskAbstract
 
         // Exit if the task is not scheduled to run yet
         if (!$this->isTaskScheduledToRun()) {
-            $this->debug('Task is not scheduled for another ' . \updash\types\Task\timeSecondsToHms($this->getTaskNextRunTime() - time()));
+            $this->debug('Task is not scheduled for another ' . \application\types\Task\timeSecondsToHms($this->getTaskNextRunTime() - time()));
 
             exit;
         }
@@ -734,7 +734,7 @@ abstract class TaskAbstract
      */
     private function statTimeLoopElapsedFormatted()
     {
-        return \updash\types\Task\timeSecondsToHms($this->statTimeLoopElapsed());
+        return \application\types\Task\timeSecondsToHms($this->statTimeLoopElapsed());
     }
 
     /**
@@ -754,7 +754,7 @@ abstract class TaskAbstract
      */
     private function statTimeRemainingFormatted()
     {
-        return \updash\types\Task\timeSecondsToHms($this->statTimeRemaining());
+        return \application\types\Task\timeSecondsToHms($this->statTimeRemaining());
     }
 
     /**

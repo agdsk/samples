@@ -1,7 +1,7 @@
 <?php
 
-use updash\services\FlagManager;
-use updash\types\Task\TaskAbstract;
+use application\services\FlagManager;
+use application\types\Task\TaskAbstract;
 
 /**
  *
@@ -39,7 +39,7 @@ class flagger extends TaskAbstract
 
             // Determine the latest sales or service date
             $latestDate          = max(strtotime($feed['SalesEnd']), strtotime($feed['ServiceEnd']));
-            $latestDateFormatted = \updash\tasks\dateAmerican($latestDate);
+            $latestDateFormatted = \application\tasks\dateAmerican($latestDate);
 
             // Flag the feed if it is active and the latest date is more than 14 days old
             if ($feed['Active'] == 1 && $latestDate < time() - 60 * 60 * 24 * 14) {

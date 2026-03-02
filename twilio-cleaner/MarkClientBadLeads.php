@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Traits\Multithreading;
 use App\Traits\PhoneValidation;
-use App\Updash;
+use App\Application;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -28,7 +28,7 @@ class MarkClientBadLeads extends Command
 
     private int $maxChildren = 100;
 
-    private Updash $updash;
+    private Application $application;
 
     private array $results = [
         'badLeads'          => 0,
@@ -40,7 +40,7 @@ class MarkClientBadLeads extends Command
     {
         parent::__construct();
 
-        $this->updash = new Updash();
+        $this->application = new Application();
 
         // Set the inherited maximum children to the locally defined config
         $this->setMaxChildren($this->maxChildren);
@@ -60,11 +60,11 @@ class MarkClientBadLeads extends Command
         bool $dryRun = false
     ): int {
         // Get the Twilio client
-        $twilio = $this->updash->getTwilioClient($clientId);
+        $twilio = $this->application->getTwilioClient($clientId);
 
-        $this->updash->reconnect();
+        $this->application->reconnect();
 
-        $clientName = $this->updash->getClientName($clientId);
+        $clientName = $this->application->getClientName($clientId);
 
         // Verify Twilio authentication
         try {
@@ -72,7 +72,7 @@ class MarkClientBadLeads extends Command
             $io->info(sprintf('Twilio authenticated successfully. Account: %s (Status: %s)', $account->friendlyName, $account->status));
         } catch (Throwable $e) {
             $io->error(sprintf('Twilio authentication failed for ClientId %s (%s): %s', $clientId, $clientName, $e->getMessage()));
-            $this->updash->updateClientLastCheckedForBadLeads($clientId);
+            $this->application->updateClientLastCheckedForBadLeads($clientId);
 
             return Command::FAILURE;
         }
@@ -86,7 +86,7 @@ class MarkClientBadLeads extends Command
         $io->section(sprintf('Scanning Client ID: %d (%s)', $clientId, $clientName));
 
         // Get all phone numbers for the client
-        $clientLeadPhoneNumbers = $this->updash->getClientLeadPhoneNumbers($clientId);
+        $clientLeadPhoneNumbers = $this->application->getClientLeadPhoneNumbers($clientId);
         $phoneNumbers           = $clientLeadPhoneNumbers->fetchAll();
         $phoneNumbersTotal      = $clientLeadPhoneNumbers->rowCount();
 
@@ -95,7 +95,7 @@ class MarkClientBadLeads extends Command
         // If there are no phone numbers, exit early
         if ($phoneNumbersTotal < 1) {
             $io->warning('No leads found for client ID ' . $clientId);
-            $this->updash->updateClientLastCheckedForBadLeads($clientId);
+            $this->application->updateClientLastCheckedForBadLeads($clientId);
 
             return Command::SUCCESS;
         }
@@ -223,7 +223,7 @@ class MarkClientBadLeads extends Command
             return Command::SUCCESS;
         }
 
-        $this->updash->updateClientLastCheckedForBadLeads($clientId);
+        $this->application->updateClientLastCheckedForBadLeads($clientId);
 
         // If there are no bad leads, exit early
         if ($badLeads < 1) {
@@ -244,7 +244,7 @@ class MarkClientBadLeads extends Command
 
         foreach ($sharedMemory->badLeadIds as $badLeadId) {
             //$io->writeln(sprintf('Marking lead %d as bad...', $badLeadId));
-            $this->updash->markLeadAsBad($badLeadId, $clientId);
+            $this->application->markLeadAsBad($badLeadId, $clientId);
             $progressBar->advance();
         }
 

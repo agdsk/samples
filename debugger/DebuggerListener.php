@@ -1,7 +1,7 @@
 <?php
 
-use updash\types\Command\CommandAbstract;
-use updash\types\DebugMessage;
+use application\types\Command\CommandAbstract;
+use application\types\DebugMessage;
 
 /**
  * Start all tasks that are enabled
@@ -9,7 +9,7 @@ use updash\types\DebugMessage;
 class DebuggerListener extends CommandAbstract
 {
     /**
-     * Linux users to Updash user names map
+     * Linux users to Application user names map
      */
     const USER_MAP = [
         'aaron'  => 'Aaron Gidusko',
@@ -20,8 +20,8 @@ class DebuggerListener extends CommandAbstract
      */
     public function execute()
     {
-        $redis   = \updash\commands\debugBroadcaster();
-        $channel = 'updash:debug';
+        $redis   = \application\commands\debugBroadcaster();
+        $channel = 'application:debug';
 
         // For Pub/Sub we usually want a blocking read, so disable read timeout:
         $redis->setOption(Redis::OPT_READ_TIMEOUT, -1);
@@ -36,7 +36,7 @@ class DebuggerListener extends CommandAbstract
 
             // First time, get the username
             if ($userName === null) {
-                $userName = \updash\commands\debugLinuxUser();
+                $userName = \application\commands\debugLinuxUser();
             }
 
             // If the message has a username filter, and it doesn't match the current user, skip it

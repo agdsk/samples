@@ -12,9 +12,9 @@
     - The second or third parameter MAY be an array of key-value pairs that will render as URL query string parameters.
     - e.g. `urlController(counts::class, 'edit', ['id' => 12, 'mode' => 'simple'])`
 - **Dependency Injection**:
-    - The trait at `updash\traits\UsesModels` allows any class to access model methods and other dependencies.
+    - The trait at `application\traits\UsesModels` allows any class to access model methods and other dependencies.
     - Controllers, Models, Commands, Services, Tasks and any other class can access model methods in a consistent fashion.
-        - Classes other than Controllers and Models that use this trait SHOULD execute `$this->enableUpdashCompatability()` in their constructor.
+        - Classes other than Controllers and Models that use this trait SHOULD execute `$this->enableApplicationCompatability()` in their constructor.
             - This will boot CodeIgniter and load the magic getters for the model layer in the class.
             - This is always safe to do, though it is often unnecessary if CodeIgniter happens to have already been booted when the class is instantiated.
 - **Controllers**:
@@ -59,7 +59,7 @@
     - MUST extend `base_model`.
 - **Exceptions**: Use custom exception classes located in `application/exceptions/` for error handling.
     - NEVER throw PHP SPL exceptions except `\RuntimeException`.
-    - ALWAYS throw an exception that extends `updash\exceptions\ApplicationException`.
+    - ALWAYS throw an exception that extends `application\exceptions\ApplicationException`.
     - `ApplicationException` automatically records and reports thrown exceptions to the `error_handler`.
     - This behavior is configurable per exception class (e.g., by setting `$this->sendToErrorHandler = false`).
     - When possible, methods that throw several different kinds of exceptions should have all `\Exception` classes caught in a single catch block and rethrown as a promoted exception like `ServiceRequestFailed`.
@@ -75,8 +75,8 @@
     - These functions can be called from anywhere, including views.
     - Helper functions MUST always be prefixed consistently to match their filename (e.g., functions in `memory_helper.php` should start with `memory`).
     - The file `application/helpers/common_helper.php` contains legacy helper functions, many of which could be renamed and moved to other files
-- **Commands**: New commands should extend `updash\types\Command\CommandAbstract` and implement the `execute()` method.
-- **Tasks**: Long-running scripts should extend `updash\types\Task\TaskAbstract`.
+- **Commands**: New commands should extend `application\types\Command\CommandAbstract` and implement the `execute()` method.
+- **Tasks**: Long-running scripts should extend `application\types\Task\TaskAbstract`.
     - Implement `main()` for the core logic.
     - Use `$configLoop = true` for tasks that should run perpetually.
 - **APIs**: Classes for external services should be placed in `application/apis/`.
@@ -85,8 +85,8 @@
     - Listeners are registered in `event_handler::registerEventListeners()`.
 - **Middleware**: Used for cross-cutting concerns like authentication and request validation.
     - Declare middleware using the `@uses` tag in the DocBlock of a Controller class or method.
-    - Example: `@uses \updash\types\Middleware\MiddlewareMustBeAuthenticated`
-    - Middleware is executed by `updash\services\Middleware` before the controller method is called.
+    - Example: `@uses \application\types\Middleware\MiddlewareMustBeAuthenticated`
+    - Middleware is executed by `application\services\Middleware` before the controller method is called.
     - Class-level middleware runs before method-level middleware.
     - **Common Middleware**:
         - `MiddlewareMustBeAuthenticated`: Ensures user is logged in.
@@ -95,25 +95,25 @@
         - `MiddlewareHttpGet` / `MiddlewareHttpPost`: Enforces HTTP method.
     - **Custom Middleware**:
         - New middleware should be placed in `application/types/Middleware/`.
-        - Should extend `updash\types\Middleware\MiddlewareAbstract` and implement `handle()`.
+        - Should extend `application\types\Middleware\MiddlewareAbstract` and implement `handle()`.
         - Use `exit;` within `handle()` if the request should be terminated (e.g., after rendering an error page).
 - **Traits for Dependency Injection**: Use the `UsesModels` trait in classes that need access to CodeIgniter models. This provides compatibility when running outside the full CI request lifecycle.
-- **Debugging**: Use the `updash\traits\Debugger` trait for logging.
+- **Debugging**: Use the `application\traits\Debugger` trait for logging.
     - Call `$this->debug($message)` to log messages.
     - Debug messages are automatically handled based on environment (printed in CLI, sent to Redis for broadcasting, or stored in internal log).
-- **Multithreading**: Use the `updash\traits\Multithreading` trait for forking child processes in CLI scripts.
+- **Multithreading**: Use the `application\traits\Multithreading` trait for forking child processes in CLI scripts.
     - Use `$this->forkProcess()` to fork.
     - Use `$this->waitForAllChildren()` or `$this->waitForSpareChild()` to manage child processes.
 
 #### Testing
 
-- **Base Test Class**: All tests should extend `updash\types\TestCase`.
+- **Base Test Class**: All tests should extend `application\types\TestCase`.
 - **Test Execution**: Run tests using the custom bootstrap:
   ```bash
   vendor/bin/phpunit --bootstrap phpunit.php tests/path/to/Test.php
   ```
 - **Database Cleanup**: Tests that modify the database should ideally clean up after themselves (e.g., in `tearDown()`) or use unique identifiers to avoid collisions.
-- **Authentication in Tests**: Use helper methods like `authenticateAsAaron()` or `authenticateAsUser($id)` in `TestCaseUpdash` for testing protected functionality.
+- **Authentication in Tests**: Use helper methods like `authenticateAsAaron()` or `authenticateAsUser($id)` in `TestCaseApplication` for testing protected functionality.
 
 ### Entry Points
 
@@ -151,7 +151,7 @@ All executable entry points for the application are located in the project root:
 - `scripts/python/`: Python scripts.
 - `system/`: CodeIgniter core files.
 - `tests/application/`: Mirror the application structure for unit and integration tests.
-- `updashtwilio/`: Twilio endpoints.
+- `applicationtwilio/`: Twilio endpoints.
 - `vendor/`: Composer dependencies.
 
 ### Symbol Naming Conventions

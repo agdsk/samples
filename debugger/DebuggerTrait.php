@@ -1,6 +1,6 @@
 <?php
 
-use updash\types\DebugMessage;
+use application\types\DebugMessage;
 
 /**
  * Debugger
@@ -28,7 +28,7 @@ trait DebuggerTrait
      * Generate a DebugMessage, which can be consumed in a variety of ways
      * - if debugLogEnabled() is true, it will be added to an internal log
      * - if running in CLI, it will be printed to the console
-     * - if a Redis connection is available, it will be published to the 'updash:debug' channel
+     * - if a Redis connection is available, it will be published to the 'application:debug' channel
      *
      * @param string|array $text
      * @return void
@@ -60,14 +60,14 @@ trait DebuggerTrait
         }
 
         // Print to console if running in CLI
-        if (\updash\traits\isCommandLineInterface()) {
+        if (\application\traits\isCommandLineInterface()) {
             $debugMessage->printLine();
         }
 
         // Broadcast via Redis if available
-        if ($redis = \updash\traits\debugBroadcaster()) {
+        if ($redis = \application\traits\debugBroadcaster()) {
             try {
-                $redis->publish('updash:debug', $debugMessage);
+                $redis->publish('application:debug', $debugMessage);
             } catch (Exception $e) {
                 // Fail silently
             }
