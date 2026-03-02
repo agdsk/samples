@@ -1,7 +1,3 @@
----
-apply: always
----
-
 ### Project Guidelines
 
 #### Architecture & Design
